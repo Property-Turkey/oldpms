@@ -87,20 +87,7 @@ $to = !isset($_GET['to']) ? date('Y-m-d') : $_GET['to'];
                   </div>
                <?php } ?>
 
-               <?php //Sellers 
-               if (in_array($authUser['user_role'], ['admin.admin', 'admin.root', 'admin.supervisor'])) {
-               ?>
-                  <div class=" col-md-4 col-sm-6 col-6 tile_div">
-                     <a href="<?= $app_folder ?>/admin/sellers" class="tile_div_content">
-                        <span class="count_top"><i class="fa fa-handshake-o"></i> <?= __('sellers') ?></span>
-                        <div class="count">
-                           <ii>{{rec.dashboard.stats.numbers.total_sellers}}</ii>
-                        </div>
-                        <span class="count_bottom"><?= __('total') ?>
-                        </span>
-                     </a>
-                  </div>
-               <?php } ?>
+               
 
                <?php //Projects 
                ?>

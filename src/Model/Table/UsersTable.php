@@ -31,7 +31,6 @@ class UsersTable extends Table
             'foreignKey' => 'user_id',
         ]);
         
-      
 
 		$this->addBehavior('Log');
     }

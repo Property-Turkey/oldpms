@@ -215,7 +215,7 @@ class UsersController extends AppController
             $Users = $this->getTableLocator()->get('Users');
             $Properties = $this->getTableLocator()->get('Properties');
             $Projects = $this->getTableLocator()->get('Projects');
-            $Sellers = $this->getTableLocator()->get('Sellers');
+            // $Sellers = $this->getTableLocator()->get('Sellers');
             $Developers = $this->getTableLocator()->get('Developers');
             // $Offices = $this->getTableLocator()->get('Offices');
 
@@ -229,7 +229,7 @@ class UsersController extends AppController
                 'total_active_properties'=>$Properties->find('all')->where(['language_id'=>$this->currlangid, 'rec_state'=>1])->count(),
                 'total_inactive_projects'=>$Projects->find('all')->where(['rec_state'=>0])->count(),
                 'total_active_projects'=>$Projects->find('all')->where(['rec_state'=>1])->count(),
-                'total_sellers'=>$Sellers->find('all')->count(),
+                // 'total_sellers'=>$Sellers->find('all')->count(),
                 'total_developers'=>$Developers->find('all')->count(),
                 // 'total_offices'=>$Offices->find('all')->count(),
             ];

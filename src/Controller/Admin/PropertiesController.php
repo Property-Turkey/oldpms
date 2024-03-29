@@ -143,7 +143,7 @@ debug( $regions );
             $_list = $this->request->getQuery('list');
             $_adrslist = $this->request->getQuery('adrslist');
             $_cats = $this->request->getQuery('cats');
-            $_seller_cat = $this->request->getQuery('seller_cat');
+            // $_seller_cat = $this->request->getQuery('seller_cat');
 
             // ONE RECORD
             if(!empty($_id)){
@@ -510,7 +510,7 @@ debug( $regions );
         unset($dt['project']);
         unset($dt['developer']);
         unset($dt['user']);
-        unset($dt['seller']);
+        // unset($dt['seller']);
 
         // edit mode
         if ($this->request->is(['patch', 'put'])) {

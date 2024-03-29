@@ -1,14 +1,20 @@
-<?php 
-    $from = $this->request->getQuery('from');
-    $to = $this->request->getQuery('to');
-    $k = $this->request->getQuery('k');
-    $col = $this->request->getQuery('col');
-    $method = $this->request->getQuery('method');
-    $params = http_build_query(( $this->request->getQuery() ));
+<?php
+$from = $this->request->getQuery('from');
+$to = $this->request->getQuery('to');
+$k = $this->request->getQuery('k');
+$col = $this->request->getQuery('col');
+$method = $this->request->getQuery('method');
+
+$params = http_build_query(($this->request->getQuery()));
+// dd($params);
+
 ?>
 <div class="right_col" role="main" ng-init="
-        doGet('/admin/projects/index?list=1&<?=$params?>&page='+paging.page, 'list', 'projects');
-        doGet('/configs/cat/all?prefix=PROJ', 'list', 'categories');
+
+doGet('/admin/projects/index?list=1&page='+paging.page+'&<?= $params ?>', 'list', 'projects');
+        doGet('/configs/cat/all', 'list', 'categories');
+
+        
     ">
     <div class="">
         <div class="page-title">
@@ -142,6 +148,7 @@
                             <!-- <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li> -->
                             <li class="dropdown">
+                                
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                     aria-expanded="false"><i class="fa fa-paper-plane"></i> <?=__('assign_to_content_manager')?>
                                 </a>
@@ -236,24 +243,24 @@
                             </div>
                             
                             <div class="grid_row row" ng-repeat="itm in lists.projects track by $index">
-
+{{itm}}
                                 <?php if(in_array($authUser['user_role'], ['admin.root', 'admin.admin', 'admin.supervisor'])){?>
-                                <div class="col-sm-1 hideMobSm grid_header">
-                                    <label class="mycheckbox chkb">
-                                        <input type="checkbox" ng-model="selected[itm.id]" ng-value="{{itm.id}}">
-                                        <span></span> {{ itm.id }}
-                                    </label>
-                                </div>
+                                    <div class="col-sm-1 hideMobSm grid_header">
+                                        <label class="mycheckbox chkb">
+                                            <input type="checkbox" ng-model="selected[itm.id]" ng-value="{{itm.id}}">
+                                            <span></span> {{ itm.id }}
+                                        </label>
+                                    </div>
 
-                                <div class="col-4 hideWeb grid_header">
-                                    <?=__('id')?> 
-                                    <label class="mycheckbox chkb">
-                                        <input type="checkbox" ng-model="selected[itm.id]" ng-value="{{itm.id}}">
-                                        <span></span>
-                                    </label>
-                                </div>
-                                
-                                <div class="col-md-1 col-8 hideWeb">{{ itm.id }}</div>
+                                    <div class="col-4 hideWeb grid_header">
+                                        <?=__('id')?> 
+                                        <label class="mycheckbox chkb">
+                                            <input type="checkbox" ng-model="selected[itm.id]" ng-value="{{itm.id}}">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="col-md-1 col-8 hideWeb">{{ itm.id }}</div>
                                 <?php }?>
 
                                 <div class="col-4 hideWeb grid_header"><?=__('project_title')?></div>

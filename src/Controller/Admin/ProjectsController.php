@@ -100,8 +100,33 @@ class ProjectsController extends AppController
                     JSON_UNESCAPED_UNICODE); die();
             }
             // LIST
-            if(!empty($_list)){ 
+            // if(!empty($_list)){ 
 
+            //     $queryParams = $this->getRequest()->getQueryParams();
+            //     $queryParams['page'] = $_page;
+            //     $this->setRequest($this->getRequest()->withQueryParams($queryParams));
+
+            //     if($this->authUser['user_role'] == 'admin.callcenter'){
+            //         $conditions['Projects.rec_state > '] = 0;
+            //     }
+            //     if($this->authUser['user_role'] == 'admin.content'){
+            //         // $conditions['UserProject.user_id'] = $this->authUser['id'];
+            //     }
+            //     $data = $this->paginate($this->Projects, [                  
+            //         "order"=>[ 'Projects.'.$_col => $_dir ],
+            //         "contain"=>["Users"],
+            //         "fields"=>[
+            //             "Projects.id", "Projects.user_id", "project_title", "param_space", "param_totalunits",
+            //             "adrs_country", "adrs_city", "adrs_region", "adrs_district", "Projects.rec_state", "Projects.stat_updated",
+            //             "Users.user_fullname",],
+            //         "conditions"=>$conditions
+            //     ]);
+            // }
+
+            // LIST
+            if(!empty($_list)){ 
+                
+                $conditions['Projects.language_id'] = $this->currlangid;
                 $queryParams = $this->getRequest()->getQueryParams();
                 $queryParams['page'] = $_page;
                 $this->setRequest($this->getRequest()->withQueryParams($queryParams));
@@ -110,21 +135,45 @@ class ProjectsController extends AppController
                     $conditions['Projects.rec_state > '] = 0;
                 }
                 if($this->authUser['user_role'] == 'admin.content'){
-                    // $conditions['UserProject.user_id'] = $this->authUser['id'];
+                    // $conditions['UserProperty.user_id'] = $this->authUser['id'];
                 }
-                $data = $this->paginate($this->Projects, [                  
+                
+                // list of projects for select menu in edit modal
+                $properties = $this->Projects->Properties->find('list')->where(['rec_state'=>1])->toArray();
+                $data = $this->Do->convertJson( $this->paginate($this->Projects, [
                     "order"=>[ 'Projects.'.$_col => $_dir ],
-                    "contain"=>["Users",],
+                    "contain"=>["Properties", "Users"],
                     "fields"=>[
                         "Projects.id", "Projects.user_id", "project_title", "param_space", "param_totalunits",
                         "adrs_country", "adrs_city", "adrs_region", "adrs_district", "Projects.rec_state", "Projects.stat_updated",
-                        "Users.user_fullname",],
-                    "conditions"=>$conditions
-                ]);
+                        "Users.user_fullname"
+                        // "UserProperty.id", "UserProperty.rec_state", 
+                    ],
+                    "conditions"=>$conditions,
+                ]));
             }
 
+            // // ADDRESS LIST
+            // if(isset($_adrslist)){
+            //     $dt = json_decode( file_get_contents('php://input'), true);
+            //     $adrs = ['adrs_country', 'adrs_city', 'adrs_region', 'adrs_district'];
+            //     $cond=[];
+                
+            //     if( !empty( $dt['adrs_country'] ) ){ $cond['adrs_country LIKE'] = "%".$dt['adrs_country']."%"; }
+            //     if( !empty( $dt['adrs_city'] ) ){ $cond['adrs_city LIKE'] = "%".$dt['adrs_city']."%"; }
+            //     if( !empty( $dt['adrs_region'] ) ){ $cond['adrs_region LIKE'] = "%".$dt['adrs_region']."%"; }
+            //     if( !empty( $dt['adrs_district'] ) ){ $cond['adrs_district LIKE'] = "%".$dt['adrs_district']."%"; }
+                
+            //     $data = $this->Projects->find('all', [
+            //         "order"=>[ $_adrslist => "DESC" ],
+            //         "fields"=>["Projects.id", "Projects.".$_adrslist],
+            //         "conditions"=>$cond,
+            //     ])->distinct([$_adrslist])->all()->toList();
+            //     echo json_encode( [ "status"=>"SUCCESS",  "data"=>$data, "debug"=>$cond ], JSON_UNESCAPED_UNICODE); die();
+            // }
             // ADDRESS LIST
             if(isset($_adrslist)){
+
                 $dt = json_decode( file_get_contents('php://input'), true);
                 $adrs = ['adrs_country', 'adrs_city', 'adrs_region', 'adrs_district'];
                 $cond=[];
@@ -133,14 +182,14 @@ class ProjectsController extends AppController
                 if( !empty( $dt['adrs_city'] ) ){ $cond['adrs_city LIKE'] = "%".$dt['adrs_city']."%"; }
                 if( !empty( $dt['adrs_region'] ) ){ $cond['adrs_region LIKE'] = "%".$dt['adrs_region']."%"; }
                 if( !empty( $dt['adrs_district'] ) ){ $cond['adrs_district LIKE'] = "%".$dt['adrs_district']."%"; }
-                
+
                 $data = $this->Projects->find('all', [
                     "order"=>[ $_adrslist => "DESC" ],
                     "fields"=>["Projects.id", "Projects.".$_adrslist],
                     "conditions"=>$cond,
                 ])->distinct([$_adrslist])->all()->toList();
-                
-                echo json_encode( [ "status"=>"SUCCESS",  "data"=>$this->Do->convertJson( $data ), "debug"=>$cond], JSON_UNESCAPED_UNICODE); die();
+                echo json_encode( [ "status"=>"SUCCESS",  "data"=>$data, "debug"=>$cond, 
+                    "projects_list"=>empty($properties) ? [] : $properties, ], JSON_UNESCAPED_UNICODE); die();
             }
 
             echo json_encode( 
@@ -440,9 +489,9 @@ class ProjectsController extends AppController
         }
         
         $developers = $this->Projects->Developers->find('list')->where(['rec_state'=>1]);
-        $sellers = $this->Projects->Sellers->find('list')->where(['rec_state'=>1]);
+        // $sellers = $this->Projects->Sellers->find('list')->where(['rec_state'=>1]);
 
-        $this->set(compact('developers', 'sellers'));
+        $this->set(compact('developers'));
     }
 
 	public function delimage() 

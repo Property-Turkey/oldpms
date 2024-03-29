@@ -160,7 +160,7 @@ $isAdmin = in_array($authUser['user_role'], ['admin.supervisor', 'admin.admin', 
                                 </div>
                             </div>
 
-                            <div class="col-md-6 col-sm-6  form-group has-feedback">
+                            <!-- <div class="col-md-6 col-sm-6  form-group has-feedback">
                                 <label><?= __('seller_id') ?></label>
                                 <div class="div">
                                     <?=$this->Form->control('', [
@@ -173,7 +173,7 @@ $isAdmin = in_array($authUser['user_role'], ['admin.supervisor', 'admin.admin', 
                                     ])?>
                                     <span class="fa fa-handshake-o form-control-feedback left" aria-hidden="true"></span>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="col-md-6 col-sm-6  form-group has-feedback">
                                 <label><?= __('project_ref') ?></label>

@@ -26,17 +26,11 @@ class ProjectsController extends AppController
         $this->set(compact('projects'));
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Project id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
+ 
     public function view($id = null)
     {
         $project = $this->Projects->get($id, [
-            'contain' => ['Categories', 'Users', 'Developers', 'UserProject', 'Floorplans', 'Properties', 'Sellers', 'Histories', 'Proposals', 'Docs'],
+            'contain' => ['Categories', 'Users', 'Developers', 'Properties'],
         ]);
 
         $this->set(compact('project'));

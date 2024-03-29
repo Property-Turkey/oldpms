@@ -210,7 +210,7 @@ class AppController extends Controller
 
         // $offices = $this->getTableLocator()->get('Offices')->find('list');
 
-        $isMap = ( strpos('Projects/index,Properties/save,Properties/wizard,Projects/save', 
+        $isMap = ( strpos('Projects/index,Properties/save,Properties/wizard,Projects/save,Properties/index,Properties/save', 
                 $this->request->getParam('controller') . '/' . $this->request->getParam('action')) !== false) ? 1 : 0;
 
         $currency_ratios = $this->getTableLocator()->get('Configs')->find('list', [

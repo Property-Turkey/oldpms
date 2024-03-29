@@ -59,9 +59,10 @@ class ProjectsController extends AppController
 
                 $data = $this->Projects->get( $_id, [
                     "contain"=>[
-                        "Properties"=>["fields"=>[
-                            "Properties.id", "project_id", "property_title", "property_photos", 
-                            "property_price", "property_currency", "adrs_city", "adrs_region", "adrs_district"]
+                        "Properties"=>[
+                            "fields"=>[
+                                 "Properties.id", "project_id", "property_title", "property_photos", 
+                                 "property_price", "property_currency", "adrs_city", "adrs_region", "adrs_district"]
                         ],
                         // "Proposals"=>['conditions'=>['rec_state'=>1, 'user_id'=>$this->authUser['id']]], 
                         // 'Docs'=>['conditions'=>['rec_state'=>1, 'doc_allowed_roles LIKE '=>'%'.$this->authUser['user_role'].'%']],

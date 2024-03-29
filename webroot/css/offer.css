@@ -1,0 +1,199 @@
+:root {
+    --color_1: #82181a;
+    --color_2: #666;
+    --color_3: #ccc;
+}
+.offer-container{
+    padding: 10px 8%;
+    overflow: hidden;
+}
+
+.offer-container h1{
+    font-size: 24px;
+    font-weight: bold;
+}
+.carousel-inner{
+    max-height: 400px;
+    text-align: center;
+    background: #000;
+}
+.carousel-inner .carousel-item img{
+    height: 400px;
+}
+.slideThumb * {
+    transition: all 0.5s;
+}
+.slideThumb img {
+    width: 70px;
+    height: 50px;
+}
+.slideThumb span {
+    border: 1px solid #ccc;
+    cursor: pointer;
+    margin: 2px 0;
+    display: inline-block;
+}
+.slideThumb span.active {
+    transform: scale(1.1);
+    box-shadow: 0 0px 2px 2px #000;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: drop-shadow(0 0 4px #000);
+}
+.carousel-indicators {
+    position: relative;
+    margin-right: 0;
+    margin-left: 0;
+    overflow: hidden;
+    padding: 6px;
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.offer_price{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.offer_price h2{
+    color: var(--color_1);
+    font-weight: bold;
+}
+.no-padding{
+    padding: 0;
+}
+.no-padding-right{
+    padding-right: 0;
+}
+.no-padding-left{
+    padding-left: 0;
+}
+.spec_offer_item > div{
+    white-space: nowrap;
+    background: #eee;
+    margin: 6px 0;
+    padding: 6px 0;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.spec_offer_item > div > div{
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+.thumbContainer{
+    position: relative;
+}
+.thumbContainer .carousel-control-next, .thumbContainer  .carousel-control-prev {
+    z-index: 999;
+    width: 30px;
+    background: #000;
+}
+.offer_video iframe{
+    min-height: 300px;
+}
+.offer_video2 iframe{
+    min-height: 500px;
+}
+.gmapImg img{
+    width: 100%;
+}
+.payment_div{
+    border: 1px solid var(--color_2);
+    border-radius: 3px;
+    margin: auto;
+    padding: 10% 20%;
+    text-align: center;
+}
+.payment_div .price2{
+    font-size: 30px;
+    color: var(--color_1);
+    font-weight: bold;
+}
+.payment_div .price2 small{
+    font-size: 14px;
+    display: block;
+}
+.payment_div > div{
+    border-bottom: 1px solid var(--color_3);
+    padding: 8px 0;
+}
+.payment_div > div:last-child{
+    border-bottom: none;
+}
+.payment_div h3{
+    color: var(--color_1);
+}
+.rside_border{
+    border-right: 1px solid #ddd;
+}
+.section-padding-bottom{
+    padding-bottom: 60px
+}
+.rside-padding{
+    padding-right: 40px;
+}
+.lside-padding{
+    padding-left: 40px;
+}
+.btn-gray{
+    background: #eee;
+}
+.mixitup-control-active{
+    background: var(--color_3);
+}
+.mix{
+    margin-bottom: 20px;
+}
+.mix p, .mix h3{
+    margin: 0;
+}
+.btns-bar{
+    border-top: 1px solid var(--color_3);
+    border-bottom: 1px solid var(--color_3);
+    margin: 10px 0;
+    padding: 6px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+}
+
+
+
+@media (max-width: 576px) {}
+@media (max-width: 992px) {
+    .btns-bar{
+        overflow-x: scroll;
+    }
+    .rside_border{
+        border-right: none;
+    }
+    .rside-padding{
+        padding-right: 15px ;
+    }
+    .lside-padding{
+        padding-left: 15px ;
+    }
+    .offer-container {
+        padding: 10px ;
+    }
+}
+
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (max-width: 768px) {
+    
+    .spec_offer_item:nth-child(even){
+        padding-left: 6px;
+    }
+    .spec_offer_item:nth-child(odd){
+        padding-right: 6px;
+    }
+    .payment_div{
+        max-width: 80%;
+    }
+}

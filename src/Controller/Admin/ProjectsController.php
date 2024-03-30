@@ -140,8 +140,8 @@ class ProjectsController extends AppController
                 
                 // list of projects for select menu in edit modal
                 $properties = $this->Projects->Properties->find('list')->where(['rec_state'=>1])->toArray();
-                $data = $this->Do->convertJson( $this->paginate($this->Projects, [
-                    "order"=>[ 'Projects.'.$_col => $_dir ],
+                $data = $this->Do->convertJson( $this->paginate($this->Properties, [
+                    "order"=>['Projects.'.$_col => $_dir],   
                     "contain"=>["Properties", "Users"],
                     "fields"=>[
                         "Projects.id", "Projects.user_id", "project_title", "param_space", "param_totalunits",
@@ -151,6 +151,7 @@ class ProjectsController extends AppController
                     ],
                     "conditions"=>$conditions,
                 ]));
+            
             }
 
             // // ADDRESS LIST

@@ -75,7 +75,7 @@ $to = !isset($_GET['to']) ? date('Y-m-d') : $_GET['to'];
                <?php //Offices 
                if (in_array($authUser['user_role'], ['admin.admin', 'admin.root'])) {
                ?>
-                  <div class=" col-md-4 col-sm-6 col-6 tile_div">
+                  <!-- <div class=" col-md-4 col-sm-6 col-6 tile_div">
                      <a href="<?= $app_folder ?>/admin/offices" class="tile_div_content">
                         <span class="count_top"><i class="fa fa-briefcase"></i> <?= __('offices') ?></span>
                         <div class="count">
@@ -84,7 +84,7 @@ $to = !isset($_GET['to']) ? date('Y-m-d') : $_GET['to'];
                         <span class="count_bottom"><?= __('total') ?>
                         </span>
                      </a>
-                  </div>
+                  </div> -->
                <?php } ?>
 
                

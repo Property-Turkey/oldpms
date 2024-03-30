@@ -208,90 +208,81 @@ class UsersController extends AppController
     }
 
     private function statistics()
-    {
+{
+    if ($this->authUser["id"]) {
+        $Users = $this->getTableLocator()->get('Users');
+        $Properties = $this->getTableLocator()->get('Properties');
+        $Projects = $this->getTableLocator()->get('Projects');
+        $Developers = $this->getTableLocator()->get('Developers');
 
-        if($this->authUser["id"]){
-            
-            $Users = $this->getTableLocator()->get('Users');
-            $Properties = $this->getTableLocator()->get('Properties');
-            $Projects = $this->getTableLocator()->get('Projects');
-            // $Sellers = $this->getTableLocator()->get('Sellers');
-            $Developers = $this->getTableLocator()->get('Developers');
-            // $Offices = $this->getTableLocator()->get('Offices');
+        // NUMBERS
+        $q_numbers = [
+            'total_disabled_users' => $Users->find('all')->where(['rec_state' => 0])->count(),
+            'total_enabled_users' => $Users->find('all')->where(['rec_state' => 1])->count(),
+            'total_inactive_properties' => $Properties->find('all')->where(['language_id' => $this->currlangid, 'rec_state' => 0])->count(),
+            'total_active_properties' => $Properties->find('all')->where(['language_id' => $this->currlangid, 'rec_state' => 1])->count(),
+            'total_inactive_projects' => $Projects->find('all')->where(['rec_state' => 0])->count(),
+            'total_active_projects' => $Projects->find('all')->where(['rec_state' => 1])->count(),
+            'total_developers' => $Developers->find('all')->count(),
+        ];
 
-            // NUMBERS
-            $q_numbers = [
-                'total_disabled_users'=>$Users->find('all')->where(['rec_state'=>0])->count(),
-                'total_enabled_users'=>$Users->find('all')->where(['rec_state'=>1])->count(),
-                // 'total_updated_properties'=>$Properties->find('all')->where(['language_id'=>$this->currlangid, 'stat_updated >'=>$this->outdatedContent])->count(),
-                // 'total_outdated_properties'=>$Properties->find('all')->where(['language_id'=>$this->currlangid, 'stat_updated <'=>$this->outdatedContent])->count(),
-                'total_inactive_properties'=>$Properties->find('all')->where(['language_id'=>$this->currlangid, 'rec_state'=>0])->count(),
-                'total_active_properties'=>$Properties->find('all')->where(['language_id'=>$this->currlangid, 'rec_state'=>1])->count(),
-                'total_inactive_projects'=>$Projects->find('all')->where(['rec_state'=>0])->count(),
-                'total_active_projects'=>$Projects->find('all')->where(['rec_state'=>1])->count(),
-                // 'total_sellers'=>$Sellers->find('all')->count(),
-                'total_developers'=>$Developers->find('all')->count(),
-                // 'total_offices'=>$Offices->find('all')->count(),
-            ];
+        // USERS 
+        $q_users = $Users->find('all', [
+            'fields' => ['id', 'label' => 'user_fullname', 'user_role', 'stat_logins']
+        ])->toArray();
 
-            // USERS 
-            $q_users = $Users->find('all', [
-                'fields'=>['id', 'label'=>'user_fullname', 'user_role', 'stat_logins'
-            ]])->toArray();
+        $users = ['items' => $q_users, 'labels' => [], 'values' => []];
+        $logins = ['items' => $q_users, 'labels' => [], 'values' => []];
 
-            $users = ['items'=>$q_users, 'labels'=>[], 'values'=>[]];
-            $logins = ['items'=>$q_users, 'labels'=>[], 'values'=>[]];
-            $logins['labels'] = array_values(array_column($q_users, 'label'));
-            $logins['values'] = array_values(array_column($q_users, 'stat_logins'));
-
-            foreach($users['items'] as &$user){
-                $users['labels'][$user['user_role']] = __(empty($user['user_role']) ? '' : $user['user_role']);
-                $users['values'][$user['user_role']] = empty($users['values'][$user['user_role']]) ? 1 : $users['values'][$user['user_role']] + 1;
-                $user['total_values'][$user['user_role']] = empty($user['total_values'][$user['user_role']]) ? 1 : $user['total_values'][$user['user_role']]+1;
-            }
-            
-            $users['labels'] = array_values($users['labels']);
-            $users['values'] = array_values($users['values']);
-
-            // PROPS PRICES
-            $currCurrency = $this->Do->get('currencies')[ $this->currCurrency ];
-            $currCurrency_icon = $this->Do->get('currencies_icons')[ $this->currCurrency ];
-            $block = floor( $this->Do->currencyConverter("TRY", $currCurrency, 500000) );
-            
-            $prop_prices_q = $Properties->find('all', [
-                'conditions'=>['property_price >'=>0, 'language_id'=>$this->currlangid],
-                'fields'=>['id', 'property_price', 'property_currency']
-            ])->toArray();
-
-            $prices=['items'=>[], 'values'=>[], 'labels'=>[]];
-            foreach($prop_prices_q as &$itm){
-                $from = $this->Do->get('currencies')[ empty($itm->property_currency) ? 3 : $itm->property_currency ];
-                $itm->converted_price = floor( $this->Do->currencyConverter($from, $currCurrency, $itm->property_price) );
-                $range_num = floor( $itm->converted_price / $block );
-                $prices['values'][$range_num] = !isset($prices['values'][$range_num]) ? 1 : $prices['values'][$range_num]+1;
-            }
-            arsort($prices['values']);
-            foreach($prices['values'] as $k=>$v){
-                $prices['labels'][$k] = $currCurrency_icon.($block * ($k-1)).' - '.$currCurrency_icon.($block * ($k)).' '.$currCurrency;
-            }
-            
-            $prices['values'] = array_values( $prices['values'] );
-            $prices['labels'] = array_values( $prices['labels'] );
-
-            // debug($prices);
-            // debug(max( array_column( $prop_prices_q, 'converted_price') ));
-            return [
-                "numbers"=>$q_numbers,
-                "users"=>$users,
-                "logins"=>$logins,
-                // "prop_prices"=>$prop_prices,
-                "prices"=>$prices,
-            ];
-
-        }else{
-            return [];
+        foreach ($users['items'] as &$user) {
+            $users['labels'][$user['user_role']] = __(empty($user['user_role']) ? '' : $user['user_role']);
+            $users['values'][$user['user_role']] = isset($users['values'][$user['user_role']]) ? $users['values'][$user['user_role']] + 1 : 1;
+            $user['total_values'][$user['user_role']] = isset($user['total_values'][$user['user_role']]) ? $user['total_values'][$user['user_role']] + 1 : 1;
         }
+
+        $users['labels'] = array_values($users['labels']);
+        $users['values'] = array_values($users['values']);
+
+        foreach ($logins['items'] as $login) {
+            $logins['labels'][] = $login['label'];
+            $logins['values'][] = $login['stat_logins'];
+        }
+
+        // PROPS PRICES
+        // $currCurrency = $this->Do->get('currencies')[$this->currCurrency];
+        // $currCurrency_icon = $this->Do->get('currencies_icons')[$this->currCurrency];
+        // $block = floor($this->Do->currencyConverter("TRY", $currCurrency, 500000));
+        $prop_prices_q = $Properties->find('all', [
+            'conditions' => ['property_price >' => 0],
+            'fields' => ['id', 'property_price', 'property_currency']
+        ])->toArray();
+
+        $prices = ['items' => [], 'values' => [], 'labels' => []];
+        foreach ($prop_prices_q as &$itm) {
+            $from = $this->Do->get('currencies')[empty($itm->property_currency) ? 3 : $itm->property_currency];
+            // $itm->converted_price = floor($this->Do->currencyConverter($from, $currCurrency, $itm->property_price));
+            // $range_num = floor($itm->converted_price / $block);
+            // $prices['values'][$range_num] = isset($prices['values'][$range_num]) ? $prices['values'][$range_num] + 1 : 1;
+        }
+        arsort($prices['values']);
+        foreach ($prices['values'] as $k => $v) {
+            // $prices['labels'][$k] = $currCurrency_icon . ($block * ($k - 1)) . ' - ' . $currCurrency_icon . ($block * ($k)) . ' ' . $currCurrency;
+        }
+
+        $prices['values'] = array_values($prices['values']);
+        $prices['labels'] = array_values($prices['labels']);
+
+        return [
+            "numbers" => $q_numbers,
+            "users" => $users,
+            "logins" => $logins,
+            "prices" => $prices,
+        ];
+    } else {
+        return [];
     }
+}
+
 
     private function notifications()
     {
@@ -302,8 +293,8 @@ class UsersController extends AppController
 
             $Properties = $this->getTableLocator()->get('Properties');
             $Projects = $this->getTableLocator()->get('Projects');
-            $UserProperty = $this->getTableLocator()->get('UserProperty');
-            $UserProject = $this->getTableLocator()->get('UserProject');
+            // $UserProperty = $this->getTableLocator()->get('UserProperty');
+            // $UserProject = $this->getTableLocator()->get('UserProject');
 
             // SYSTEM ADMIN 
             if(in_array( $this->authUser['user_role'], ['admin.admin', 'admin.root'])){
@@ -343,14 +334,14 @@ class UsersController extends AppController
             }
             
             // CONTENT
-            if(in_array( $this->authUser['user_role'], ['admin.content'])){
-                $q=[
-                    'new_properties' => $UserProperty->find('all')
-                        ->where(['user_id'=>$this->authUser['id'], 'rec_state' => 1, 'language_id'=>$this->currlangid])->count(),
-                    'new_projects' => $UserProject->find('all')
-                        ->where(['user_id'=>$this->authUser['id'], 'rec_state' => 1])->count(),
-                ];
-            }
+            // if(in_array( $this->authUser['user_role'], ['admin.content'])){
+            //     $q=[
+            //         // 'new_properties' => $UserProperty->find('all')
+            //         //     ->where(['user_id'=>$this->authUser['id'], 'rec_state' => 1, 'language_id'=>$this->currlangid])->count(),
+            //         'new_projects' => $UserProject->find('all')
+            //             ->where(['user_id'=>$this->authUser['id'], 'rec_state' => 1])->count(),
+            //     ];
+            // }
             return $q;
         }else{
             return [];

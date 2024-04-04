@@ -929,6 +929,12 @@ msgid "addedby"
 msgstr "Added by"
 msgid "edit_project"
 msgstr "Edit porject"
+
+msgid "add_property"
+msgstr "Add Property"
+msgid "edit_property"
+msgstr "Edit Property"
+
 msgid "edit_developer"
 msgstr "Edit developer"
 msgid "edit_seller"

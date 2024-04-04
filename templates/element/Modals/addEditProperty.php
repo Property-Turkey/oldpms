@@ -22,11 +22,11 @@ $steps_stats = [
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">
-                    <div ng-if="!rec.project.id">
-                        <?= __('add_project') ?>
+                    <div ng-if="!rec.property.id">
+                        <?= __('add_property') ?>
                     </div>
-                    <div ng-if="rec.project.id">
-                        <?= __('edit_project') ?>
+                    <div ng-if="rec.property.id">
+                        <?= __('edit_property') ?>
                     </div>
                 </h4>
             </div>

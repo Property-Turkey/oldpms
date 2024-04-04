@@ -24,11 +24,11 @@ $params = http_build_query(($this->request->getQuery()));
                         <span class="fa fa-search"></span> <span class="hideMob"><?= __('search_and_filter') ?></span>
                     </a>
                 </span>
-                <span class="icn">
+                <!-- <span class="icn">
                     <a href="<?= $app_folder ?>/<?= $currlang ?>/admin/properties/wizard" class="btn btn-info">
                         <span class="fa fa-plus"></span> <span class="hideMob"><?= __('add_property') ?></span>
                     </a>
-                </span>
+                </span> -->
                 <span class="icn">
                     <a href class="btn btn-info" ng-click="
                             newEntity('property');
@@ -367,8 +367,16 @@ $params = http_build_query(($this->request->getQuery()));
                                         <i class="fa fa-eye"></i> <?= __('view') ?>
                                     </a> &nbsp;
                                     <?php if (in_array($authUser['user_role'], ['admin.root', 'admin.admin', 'admin.portfolio', 'admin.supervisor'])) { ?>
-                                        <a ng-hide="('<?= in_array($authUser['user_role'], ['admin.portfolio', 'user.portfolio']) ? 1 : 0 ?>' == '1' && '<?= $authUser['id'] ?>' != itm.user_id)" href="<?= $app_folder . '/' . $currlang ?>/admin/properties/wizard/{{itm.id}}" class="inline-btn">
+                                        <!-- <a ng-hide="('<?= in_array($authUser['user_role'], ['admin.portfolio', 'user.portfolio']) ? 1 : 0 ?>' == '1' && '<?= $authUser['id'] ?>' != itm.user_id)" href="<?= $app_folder . '/' . $currlang ?>/admin/properties/wizard/{{itm.id}}" class="inline-btn">
                                             <i class="fa fa-pencil"></i> <?= __('edit') ?>
+                                        </a> -->
+                                        <a href ng-hide="('<?=$authUser['user_role']?>' == 'admin.portfolio' && '<?=$authUser['id']?>' != itm.user_id)"
+                                            ng-click="
+                                                doGet('/admin/properties?id='+itm.id, 'rec', 'property');
+                                                openModal('#addEditProperty_mdl');
+                                                initMapDelay('map_mdl', 'property', 'mapPlacesSearch_mdl');
+                                                "  class="inline-btn">
+                                            <i class="fa fa-pencil"></i> <?=__('edit')?>
                                         </a>
                                     <?php } ?>
 

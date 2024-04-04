@@ -619,9 +619,10 @@ debug( $regions );
     {
         $this->request->allowMethod(['delete']);
         $ctrl = $this->request->getParam('controller');
+        // dd($ctrl);
         $this->autoRender  = false;
         $dt = json_decode( file_get_contents('php://input'), true);
-
+// dd($dt['id']);
 		if( $this->Images->deleteFile('img/'.strtolower( $ctrl ).'_photos', $dt['image'])){
             $rec = $this->$ctrl->get($dt['id']);
             

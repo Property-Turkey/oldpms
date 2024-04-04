@@ -6,7 +6,7 @@ use Cake\Database\Driver\Mysql;
 use Cake\Error\ExceptionRenderer;
 use Cake\Log\Engine\FileLog;
 
-$isLocal = env('SERVER_NAME') == 'localhost' ? true : true;
+$isLocal = env('SERVER_NAME') == 'localhost' ? true : false;
 $isDebug = empty($_GET['debug']) ? $isLocal : true;
 
 return [

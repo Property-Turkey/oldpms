@@ -808,7 +808,7 @@ $steps_stats = [
                                 class="img">
                                 <a href class="overly_btn"
                                     ng-click="
-                        delImage('/admin/properties/delimage/'+param1,{image: img.name, id: param1}, '#property_btn')">
+                        delImage('/admin/properties/delimage/'+rec.property.id,{image: img.name, id: rec.property.id}, '#property_btn')">
                                     <i class="fa fa-times"></i>
                                 </a>
                                 <img ng-src="{{getPhoto( img.tmp_name, img.name, 'properties')}}" alt=""

@@ -16,14 +16,20 @@ class ProjectsController extends AppController
         $developers = $this->Projects->Developers->find('list', [
             'conditions' => ['rec_state'=>1],
             'order' => ['dev_name' => 'ASC']
-        ]);
+        ])->toArray();
+        // dd($developers);
+        // foreach( $developers as $k=>$developer){
+        //     debug($developer);
+        // }
+
+        // dd($developers);
         // $sellers = $this->Projects->Sellers->find('list', [
         //     'conditions' => ['rec_state'=>1]
         // ])->toArray();
         $contentManagers = $this->Projects->Users->find('list', [
             'conditions' => ['user_role'=>'admin.content', 'rec_state'=>1]
         ])->toArray();
-
+// dd($contentManagers);
         $this->set(compact('developers', 'contentManagers'));
 
         if ($this->request->is('post')) {
@@ -100,33 +106,8 @@ class ProjectsController extends AppController
                     JSON_UNESCAPED_UNICODE); die();
             }
             // LIST
-            // if(!empty($_list)){ 
-
-            //     $queryParams = $this->getRequest()->getQueryParams();
-            //     $queryParams['page'] = $_page;
-            //     $this->setRequest($this->getRequest()->withQueryParams($queryParams));
-
-            //     if($this->authUser['user_role'] == 'admin.callcenter'){
-            //         $conditions['Projects.rec_state > '] = 0;
-            //     }
-            //     if($this->authUser['user_role'] == 'admin.content'){
-            //         // $conditions['UserProject.user_id'] = $this->authUser['id'];
-            //     }
-            //     $data = $this->paginate($this->Projects, [                  
-            //         "order"=>[ 'Projects.'.$_col => $_dir ],
-            //         "contain"=>["Users"],
-            //         "fields"=>[
-            //             "Projects.id", "Projects.user_id", "project_title", "param_space", "param_totalunits",
-            //             "adrs_country", "adrs_city", "adrs_region", "adrs_district", "Projects.rec_state", "Projects.stat_updated",
-            //             "Users.user_fullname",],
-            //         "conditions"=>$conditions
-            //     ]);
-            // }
-
-            // LIST
             if(!empty($_list)){ 
-                
-                $conditions['Projects.language_id'] = $this->currlangid;
+
                 $queryParams = $this->getRequest()->getQueryParams();
                 $queryParams['page'] = $_page;
                 $this->setRequest($this->getRequest()->withQueryParams($queryParams));
@@ -135,24 +116,49 @@ class ProjectsController extends AppController
                     $conditions['Projects.rec_state > '] = 0;
                 }
                 if($this->authUser['user_role'] == 'admin.content'){
-                    // $conditions['UserProperty.user_id'] = $this->authUser['id'];
+                    // $conditions['UserProject.user_id'] = $this->authUser['id'];
                 }
-                
-                // list of projects for select menu in edit modal
-                $properties = $this->Projects->Properties->find('list')->where(['rec_state'=>1])->toArray();
-                $data = $this->Do->convertJson( $this->paginate($this->Properties, [
-                    "order"=>['Projects.'.$_col => $_dir],   
-                    "contain"=>["Properties", "Users"],
+                $data = $this->paginate($this->Projects, [                  
+                    "order"=>[ 'Projects.'.$_col => $_dir ],
+                    "contain"=>["Users"],
                     "fields"=>[
-                        "id", "user_id", "project_title", "param_space", "param_totalunits",
-                        "adrs_country", "adrs_city", "adrs_region", "adrs_district", "rec_state", "stat_updated",
-                        "Users.user_fullname"
-                        // "UserProperty.id", "UserProperty.rec_state", 
-                    ],
-                    "conditions"=>$conditions,
-                ]));
-            
+                        "Projects.id", "Projects.user_id", "project_title", "param_space", "param_totalunits",
+                        "adrs_country", "adrs_city", "adrs_region", "adrs_district", "Projects.rec_state", "Projects.stat_updated",
+                        "Users.user_fullname",],
+                    "conditions"=>$conditions
+                ]);
             }
+
+            // LIST
+            // if(!empty($_list)){ 
+                
+            //     $conditions['Projects.language_id'] = $this->currlangid;
+            //     $queryParams = $this->getRequest()->getQueryParams();
+            //     $queryParams['page'] = $_page;
+            //     $this->setRequest($this->getRequest()->withQueryParams($queryParams));
+
+            //     if($this->authUser['user_role'] == 'admin.callcenter'){
+            //         $conditions['Projects.rec_state > '] = 0;
+            //     }
+            //     if($this->authUser['user_role'] == 'admin.content'){
+            //         // $conditions['UserProperty.user_id'] = $this->authUser['id'];
+            //     }
+                
+            //     // list of projects for select menu in edit modal
+            //     $properties = $this->Projects->Properties->find('list')->where(['rec_state'=>1])->toArray();
+            //     $data = $this->Do->convertJson( $this->paginate($this->Properties, [
+            //         "order"=>['Projects.'.$_col => $_dir],   
+            //         "contain"=>["Properties", "Users"],
+            //         "fields"=>[
+            //             "id", "user_id", "project_title", "param_space", "param_totalunits",
+            //             "adrs_country", "adrs_city", "adrs_region", "adrs_district", "rec_state", "stat_updated",
+            //             "Users.user_fullname"
+            //             // "UserProperty.id", "UserProperty.rec_state", 
+            //         ],
+            //         "conditions"=>$conditions,
+            //     ]));
+            
+            // }
 
             // // ADDRESS LIST
             // if(isset($_adrslist)){

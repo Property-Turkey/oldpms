@@ -241,7 +241,7 @@ $params = http_build_query(($this->request->getQuery()));
                             </div>
                             
                             <div class="grid_row row" ng-repeat="itm in lists.projects track by $index">
-{{itm}}
+
                                 <?php if(in_array($authUser['user_role'], ['admin.root', 'admin.admin', 'admin.supervisor'])){?>
                                     <div class="col-sm-1 hideMobSm grid_header">
                                         <label class="mycheckbox chkb">

@@ -319,6 +319,7 @@ $params = http_build_query(($this->request->getQuery()));
                                         <i ng-if="itm.param_isresidence == 1" class="fa fa-globe greenText" title="<?= __('param_isresidence') ?>"></i>
                                         <i class="grayText" ng-if="itm.project"><?= __('project_title') ?>: {{ itm.project.project_title }}</i>
                                     </div>
+                                    
                                     <div class="clearfix">
                                         <span class="badge badge-info"><?=__('param_rooms')?>: {{DtSetter('PROP_SPECS', itm.param_rooms)}}</span>
                                         <span class="badge badge-info"><?=__('floor')?>: {{DtSetter('PROP_SPECS', itm.param_floor)}}</span>

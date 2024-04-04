@@ -86,7 +86,7 @@
                                             <i class="grayText">
                                             ( {{DtSetter('currencies_icons', '<?=$currCurrency?>')}}
                                             {{ currencyConverter( DtSetter('currencies', rec.property.property_currency), '<?=$this->Do->get('currencies')[$currCurrency]?>', rec.property.property_price )}})</i> 
-                                            <s class="grayText" ng-if="rec.property.property_oldprice"><br/>{{DtSetter('currencies_icons', rec.property.property_currency)}} {{nFormat( rec.property.property_oldprice )}}</s>
+                                            <s class="grayText" ng-if="rec.property.property_usdprice"><br/>{{DtSetter('currencies_icons', rec.property.property_currency)}} {{nFormat( rec.property.property_usdprice )}}</s>
                                         </div>
                                     </div>
                                     <div class="grid_row row">

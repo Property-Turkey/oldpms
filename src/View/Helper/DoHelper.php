@@ -104,8 +104,8 @@ class DoHelper extends Helper{
             $vals = ["disabled", "enabled"];
             $v = __($vals[$v]);
         }
-        if(in_array($k, ["param_space", "param_totalunits", "property_price", "property_oldprice", "param_monthlytax", "param_deposit", "param_grossspace", "param_netspace"])){
-			$units = ["param_space"=>"m2", "param_totalunits"=>"unit", "property_price"=>"", "property_oldprice"=>"", "param_monthlytax"=>"tl", "param_deposit"=>"tl", "param_grossspace"=>"m2", "param_netspace"=>"m2"];
+        if(in_array($k, ["param_space", "param_totalunits", "property_price", "property_usdprice", "param_monthlytax", "param_deposit", "param_grossspace", "param_netspace"])){
+			$units = ["param_space"=>"m2", "param_totalunits"=>"unit", "property_price"=>"", "property_usdprice"=>"", "param_monthlytax"=>"tl", "param_deposit"=>"tl", "param_grossspace"=>"m2", "param_netspace"=>"m2"];
 			if(!empty( $v )){
 				$v = $this->num($v).' '.__( $units[$k] );
 			}
@@ -143,7 +143,7 @@ class DoHelper extends Helper{
 			}
 			$v = $res;
         }
-        if(strpos( $k, "param_" ) !== false && !in_array($k, ["param_deliverdate", "param_totalunits", "param_space", "property_price", "property_oldprice", "param_monthlytax", "param_deposit", "param_grossspace", "param_netspace"])){
+        if(strpos( $k, "param_" ) !== false && !in_array($k, ["param_deliverdate", "param_totalunits", "param_space", "property_price", "property_usdprice", "param_monthlytax", "param_deposit", "param_grossspace", "param_netspace"])){
 
 			if(!empty($v)){
 				$cats = $this->lcl ($this->cat($prefix.'_SPECS')) ;

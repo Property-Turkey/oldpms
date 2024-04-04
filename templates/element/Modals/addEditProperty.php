@@ -1,18 +1,9 @@
 
 <?php
-$fields = ['id', 'language_id', 'project_id', 'category_id', 'features_ids', 'property_title', 'property_desc', 'property_photos', 'property_price', 'property_oldprice', 'property_currency', 'property_loc', 'property_ref', 'adrs_country', 'adrs_city', 'adrs_region', 'adrs_district', 'adrs_street', 'adrs_block', 'adrs_no', 'param_netspace', 'param_grossspace', 'param_rooms', 'param_bedrooms', 'param_buildage', 'param_floors', 'param_floor', 'param_heat', 'param_bathrooms', 'param_balconies', 'param_isfurnitured', 'param_usestatus', 'param_monthlytax', 'param_payment', 'param_ownership', 'param_ownertype', 'param_deposit', 'seo_title', 'seo_keywords', 'seo_desc', 'stat_created', 'stat_updated', 'stat_views', 'stat_shares', 'rec_state'];
+// $fields = ['id', 'language_id', 'project_id', 'category_id', 'features_ids', 'property_title', 'property_desc', 'property_photos', 'property_price', 'property_oldprice', 'property_currency', 'property_loc', 'property_ref', 'adrs_country', 'adrs_city', 'adrs_region', 'adrs_district', 'adrs_street', 'adrs_block', 'adrs_no', 'param_netspace', 'param_grossspace', 'param_rooms', 'param_bedrooms', 'param_buildage', 'param_floors', 'param_floor', 'param_heat', 'param_bathrooms', 'param_balconies', 'param_isfurnitured', 'param_usestatus', 'param_monthlytax', 'param_payment', 'param_ownership', 'param_ownertype', 'param_deposit', 'seo_title', 'seo_keywords', 'seo_desc', 'stat_created', 'stat_updated', 'stat_views', 'stat_shares', 'rec_state'];
 $ctrl = $this->request->getParam('controller');
 $isAdmin = in_array($authUser['user_role'], ['admin.root', 'admin.admin', 'admin.supervisor']);
 
-$steps_icons = ['address' => 'map', 'specifications' => 'bars', 'features' => 'asterisk', 'usp' => 'diamond', 'photos_and_more' => 'picture-o', 'docs' => 'file'];
-$steps_stats = [
-    " 'current', '', '', '', '', '' ",
-    " 'done', 'current', '', '', '', '' ",
-    " 'done', 'done', 'current', '', '', '' ",
-    " 'done', 'done', 'done', 'current', '', '' ",
-    " 'done', 'done', 'done', 'done', 'current', '' ",
-    " 'done', 'done', 'done', 'done', 'done', 'current' ",
-];
 ?>
 
 <div class="modal fade" id="addEditProperty_mdl" tabindex="-1" role="dialog" aria-hidden="true"
@@ -693,21 +684,24 @@ $steps_stats = [
                         </div>
                     </div>
 
+                    
+
 
                     <?php /*<div class="col-md-6 col-sm-6 mb-3 ngif">
-<label><?=__('property_oldprice')?></label>
-<div class="div">
-    <?=$this->Form->control('property_oldprice', [
-        'class'=>'form-control has-feedback-left money',
-        'label'=>false,
-        'type'=>'text',
-        'ng-model'=>'rec.property.property_oldprice',
-        'mask-currency'=>'false',
-        'config'=>"{group:'.',decimal:'.', decimalSize: 0,indentation:''}",
-    ])?>
-    <span class="fa fa-{{DtSetter('currencies', rec.property.property_currency ).toLowerCase()}} form-control-feedback left" aria-hidden="true"></span>
-</div>
-</div> */ ?>
+                        <label><?=__('property_oldprice')?></label>
+                        <div class="div">
+                            <?=$this->Form->control('property_oldprice', [
+                                'class'=>'form-control has-feedback-left money',
+                                'label'=>false,
+                                'type'=>'text',
+                                'ng-model'=>'rec.property.property_oldprice',
+                                'mask-currency'=>'false',
+                                'config'=>"{group:'.',decimal:'.', decimalSize: 0,indentation:''}",
+                            ])?>
+                            <span class="fa fa-{{DtSetter('currencies', rec.property.property_currency ).toLowerCase()}} form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                        </div> */ 
+                    ?>
 
                     <div class="col-md-12 col-sm-12 mb-3 ngif">
                         <label>
@@ -732,7 +726,7 @@ $steps_stats = [
                         </div>
                     </div>
 
-                    <div class="col-md-12 col-sm-12 mb-3 ngif"
+                    <!-- <div class="col-md-12 col-sm-12 mb-3 ngif"
                         ng-if="rec.property.param_ownertype !== '-1'">
                         <label>
                             <?= __('seller_id') ?>
@@ -754,7 +748,7 @@ $steps_stats = [
                             <span class="fa fa-handshake-o form-control-feedback left"
                                 aria-hidden="true"></span>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-md-12 col-sm-12 mb-3 ngif">
                         <label>

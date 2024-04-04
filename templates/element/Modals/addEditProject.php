@@ -306,6 +306,20 @@ $isAdmin = in_array($authUser['user_role'], ['admin.supervisor', 'admin.admin', 
                                             </div>
                                         </div>
 
+                                    <?php } elseif (in_array($spec, ['param_greenspace', 'param_isresidence'])) { ?>
+                                        
+                                        <div class="col-md-6 col-sm-6 form-group has-feedback">
+                                            <label dont-set-required><?=__($spec)?></label>
+                                            <div class="div specsRadioBtn">
+                                                <label class="myradiobtn">
+                                                    <input type="radio" ng-model="rec.project.<?=$spec?>" name="<?=$spec?>" value="1"/> <span></span> <?=__('yes')?> 
+                                                </label>&nbsp;
+                                                <label class="myradiobtn">
+                                                    <input type="radio" ng-model="rec.project.<?=$spec?>" name="<?=$spec?>" value="0"/> <span></span> <?=__('no')?> 
+                                                </label>
+                                            </div>
+                                        </div>
+
                                     <?php } ?>
                                 <?php } ?>
                             </div>
@@ -487,7 +501,7 @@ $isAdmin = in_array($authUser['user_role'], ['admin.supervisor', 'admin.admin', 
                     
                     <?php // STEP 8 Upload Docoments 
                             ?>
-                    <div class="col-md-12 col-sm-12" ng-if="rec.project.id>0" id="docs">
+                    <!-- <div class="col-md-12 col-sm-12" ng-if="rec.project.id>0" id="docs">
                         <a class="xxx_title accordion_header" data-toggle="collapse" data-target="#step8">
                             <h2><i class="fa fa-file"></i> <?= __('docs') ?> <span class="fa fa-caret-down"></span></h2>
                             <div class="clearfix"></div>
@@ -496,7 +510,7 @@ $isAdmin = in_array($authUser['user_role'], ['admin.supervisor', 'admin.admin', 
                         <div class="xxx_content fade collapse " id="step8" data-parent="#accordion">
                             <?php echo $this->element('Includes/docs');?>
                         </div>
-                    </div>
+                    </div> -->
 
                 </form>
 

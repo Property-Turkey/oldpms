@@ -520,6 +520,11 @@ debug( $regions );
                     "status"=>"FAIL", "data"=>[], "msg"=>__('you_not_authorized'),
                     "redirect"=>$this->app_folder."/admin/properties/"]); die();
             }
+
+            $curCurrency = $this->Do->get('currencies')[$dt['property_currency']];
+            $dt['property_usdprice'] = $this->Do->currencyConverter($curCurrency, "USD", $dt['property_price']);
+            $rec = $this->Properties->patchEntity($rec, $dt);
+
         }
 
         // add mode
@@ -530,11 +535,22 @@ debug( $regions );
             $dt['stat_updated'] = date('Y-m-d H:i:s');
             $dt['stat_created'] = date('Y-m-d H:i:s');
             $dt['user_id'] = $this->authUser['id'];
-            $dt['language_id'] = empty($dt['language_id']) ? $this->currlang : $dt['language_id'];
+            // $dt['language_id'] = empty($dt['language_id']) ? $this->currlangid : $dt['language_id'];
             
+
+
+            $curCurrency = $this->Do->get('currencies')[$dt['property_currency']];
+            $dt['property_usdprice'] = $this->Do->currencyConverter($curCurrency, "USD", $dt['property_price']);
+
+
+            // dd($dt['property_usdprice']);
+
             $last_id = $this->Do->get_last_rec_number('properties');
             $dt['property_ref'] = 'PTP'.$last_id.'UID'.$this->authUser['id'];
 
+            $rec = $this->Properties->newEntity($dt);
+            $rec->language_id = empty($dt['language_id']) ? $this->currlangid : $dt['language_id'];
+            // dd($rec);
         }
         
         if ($this->request->is(['post', 'patch', 'put'])) {
@@ -570,12 +586,12 @@ debug( $regions );
             $dt['property_usp'] = !empty($dt['property_usp']) ? implode(',', $dt['property_usp'] ) : null;
             $dt['features_ids'] = !empty( $dt['features_ids'] ) ? ','.implode(',', array_keys( array_filter( $dt['features_ids'] ) ) ).',' : null;
             $dt['property_price'] = !empty($dt['property_price']) ? str_replace(['.',','], ['',''], $dt['property_price'].'') : '';
-            $dt['property_oldprice'] = !empty($dt['property_oldprice']) ? str_replace(['.',','], ['',''], $dt['property_oldprice'].'') : '';
+            $dt['property_usdprice'] = !empty($dt['property_usdprice']) ? str_replace(['.',','], ['',''], $dt['property_usdprice'].'') : '';
             
             // unset($dt['floorplans']);
             // dd( $dt['property_photos'] );
             
-            $rec = $this->Properties->patchEntity($rec, $dt);
+            
             
             if ($newRec = $this->Properties->save($rec)) {
                 

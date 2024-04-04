@@ -92,6 +92,14 @@
                                         <div class="col-md-9 notwrapped">{{nFormat( rec.project.param_space )}} <?=__('m2')?></div>
                                     </div>
                                     <div class="grid_row row">
+                                        <div class="col-md-3 grid_header2"><?=__('param_greensapce')?></div>
+                                        <div class="col-md-9 notwrapped">{{nFormat( rec.project.param_greensapce )}} <?=__('m2')?></div>
+                                    </div>
+                                    <div class="grid_row row">
+                                        <div class="col-md-3 grid_header2"><?=__('param_greensapce')?></div>
+                                        <div class="col-md-9 notwrapped">{{nFormat( rec.project.param_greensapce )}} <?=__('m2')?></div>
+                                    </div>
+                                    <div class="grid_row row">
                                         <div class="col-md-3 grid_header2"><?=__('param_delivertype')?></div>
                                         <div class="col-md-9 notwrapped">{{ DtSetter('PROJ_SPECS', rec.project.param_delivertype) }}</div>
                                     </div>

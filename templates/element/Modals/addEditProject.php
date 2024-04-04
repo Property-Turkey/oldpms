@@ -160,21 +160,6 @@ $isAdmin = in_array($authUser['user_role'], ['admin.supervisor', 'admin.admin', 
                                 </div>
                             </div>
 
-                            <!-- <div class="col-md-6 col-sm-6  form-group has-feedback">
-                                <label><?= __('seller_id') ?></label>
-                                <div class="div">
-                                    <?=$this->Form->control('', [
-                                        'type'=>'select',
-                                        'options'=>$sellers,
-                                        'class'=>' form-control has-feedback-left ',
-                                        'label' => false,
-                                        'empty'=>__('select_developer'),
-                                        'ng-model'=>'rec.project.seller_id'
-                                    ])?>
-                                    <span class="fa fa-handshake-o form-control-feedback left" aria-hidden="true"></span>
-                                </div>
-                            </div> -->
-
                             <div class="col-md-6 col-sm-6  form-group has-feedback">
                                 <label><?= __('project_ref') ?></label>
                                 <div class="div">
@@ -232,7 +217,7 @@ $isAdmin = in_array($authUser['user_role'], ['admin.supervisor', 'admin.admin', 
                                     if (!is_array($list)) {
                                         $type = 'text';
                                     }
-                                    if (!in_array($spec, ['param_unit_types', 'param_units_size_range', 'param_iscitizenship', 'param_isresidence'])) {
+                                    if (!in_array($spec, ['param_unit_types', 'param_units_size_range'])) {
                                 ?>
 
                                         <div class="col-lg-4 col-md-6  form-group has-feedback">
@@ -292,35 +277,7 @@ $isAdmin = in_array($authUser['user_role'], ['admin.supervisor', 'admin.admin', 
                                                     <span>{{nFormat( rec.project.<?= $spec ?>[1] ,'<?= __('m2') ?>')}}</span> <?php */ ?>
                                             </div>
                                         </div>
-                                    <?php } elseif (in_array($spec, ['param_iscitizenship', 'param_isresidence'])) { ?>
-                                        
-                                        <div class="col-md-6 col-sm-6 form-group has-feedback">
-                                            <label dont-set-required><?=__($spec)?></label>
-                                            <div class="div specsRadioBtn">
-                                                <label class="myradiobtn">
-                                                    <input type="radio" ng-model="rec.project.<?=$spec?>" name="<?=$spec?>" value="1"/> <span></span> <?=__('yes')?> 
-                                                </label>&nbsp;
-                                                <label class="myradiobtn">
-                                                    <input type="radio" ng-model="rec.project.<?=$spec?>" name="<?=$spec?>" value="0"/> <span></span> <?=__('no')?> 
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                    <?php } elseif (in_array($spec, ['param_greenspace', 'param_isresidence'])) { ?>
-                                        
-                                        <div class="col-md-6 col-sm-6 form-group has-feedback">
-                                            <label dont-set-required><?=__($spec)?></label>
-                                            <div class="div specsRadioBtn">
-                                                <label class="myradiobtn">
-                                                    <input type="radio" ng-model="rec.project.<?=$spec?>" name="<?=$spec?>" value="1"/> <span></span> <?=__('yes')?> 
-                                                </label>&nbsp;
-                                                <label class="myradiobtn">
-                                                    <input type="radio" ng-model="rec.project.<?=$spec?>" name="<?=$spec?>" value="0"/> <span></span> <?=__('no')?> 
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                    <?php } ?>
+                                    <?php }?>
                                 <?php } ?>
                             </div>
 
@@ -453,7 +410,7 @@ $isAdmin = in_array($authUser['user_role'], ['admin.supervisor', 'admin.admin', 
 
 
                     <!-- STEP 6 Floorplans -->
-                    <div class="col-md-12 col-sm-12" ng-if="rec.project.id>0" id="floorplan_form">
+                    <!-- <div class="col-md-12 col-sm-12" ng-if="rec.project.id>0" id="floorplan_form">
                         <a class="xxx_title accordion_header" data-toggle="collapse" data-target="#step6">
                             <h2><i class="fa fa-sitemap"></i> <?= __('project_floorplans') ?> <span class="fa fa-caret-down"></span></h2>
                             <div class="clearfix"></div>
@@ -463,7 +420,7 @@ $isAdmin = in_array($authUser['user_role'], ['admin.supervisor', 'admin.admin', 
                             <?php echo $this->element('Includes/floorplans')?>
 
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- STEP 7 Descriptions -->
                     <div class="col-md-12 col-sm-12" ng-if="rec.project.id>0">

@@ -96,7 +96,7 @@ $params = http_build_query(($this->request->getQuery()));
                                     <?php // non numeric( non-sliders ) specs?>
                                     <div ng-if="
                                         isArray(val) && 
-                                        'param_downpayment,param_installment,param_installment_months,param_bldfloors,property_price,param_residential_units,param_commercial_units,param_units_size_range,param_totalunits,param_space,features_ids,param_blocks'.indexOf(key) == -1">
+                                        'param_downpayment,param_installment,param_installment_months,property_price,param_residential_units,param_commercial_units,param_units_size_range,param_totalunits,param_space,param_greensapce,param_homesspace,features_ids,param_blocks'.indexOf(key) == -1">
                                         <b>{{lists.categories['PROJ_SPECS_keys'][key]}}</b>: 
                                         <span ng-repeat="(key2, val2) in val track by $index" ng-if="isArray(val)">
                                             <a href ng-click="removeFilter('specs', key, $index)"> {{lists.categories['PROJ_SPECS'][val2]}}<i class="fa fa-times"></i> </a>
@@ -104,7 +104,7 @@ $params = http_build_query(($this->request->getQuery()));
                                     </div>
                                     
                                     <?php // numeric( sliders ) specs?> 
-                                    <div ng-if="'param_downpayment,param_installment,param_installment_months,param_bldfloors,property_price,param_residential_units,project_price,param_commercial_units,param_units_size_range,param_totalunits,param_space,param_blocks'.indexOf(key) > -1">
+                                    <div ng-if="'param_downpayment,param_installment,param_installment_months,property_price,param_residential_units,project_price,param_commercial_units,param_units_size_range,param_totalunits,param_space,param_greensapce,param_homesspace,param_blocks'.indexOf(key) > -1">
                                         <b>{{lists.categories['PROJ_SPECS_keys'][key]}}</b>: 
                                         <span >
                                             <a href ng-click="removeFilter('slide', key, val)"> {{ nFormat(val[0])+' - '+nFormat(val[1]) }}<i class="fa fa-times"></i> </a>

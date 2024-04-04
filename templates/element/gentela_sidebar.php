@@ -118,6 +118,24 @@ $admin_menu=[
         //         // ["name"=>"create",  "url" => ["Searchlogs", "save", ""]]
         //     ]
         // ],
+        ["name"=>"categories",
+        "icon"=>"list",
+        "roles"=>["admin.root", "admin.portfolio", "admin.callcenter", "admin.supervisor", "admin.admin", "admin.content"],
+        "active"=>"/categories/index,/categories/save,/categories/view",
+        "sub" => [
+                ["name"=>"All", "url" => ["Categories", "index", ""]],
+                ["name"=>"TAGS_CATEGORIES", "url" => ["Categories", "index", "8"]],
+                ["name"=>"COUNTRIES_CATEGORIES", "url" => ["Categories", "index", "7"]],
+                ["name"=>"SPROJ_FEATURES", "url" => ["Categories", "index", "6"]],
+                ["name"=>"PROJ_SPECS", "url" => ["Categories", "index", "5"]],
+                ["name"=>"PROP_SPECS", "url" => ["Categories", "index", "4"]],
+                ["name"=>"PROP_FEATURES", "url" => ["Categories", "index", "3"]],
+                ["name"=>"PROP_SPECS", "url" => ["Categories", "index", "2"]],
+                ["name"=>"PROP_CATEGORIES", "url" => ["Categories", "index", "1"]],
+                ["name"=>"param-rooms", "url" => ["Categories", "index", "152"]],
+                ["name"=>"param-unit-types", "url" => ["Categories", "index", "618"]]
+           ]
+       ],
         ["name"=>"configs",
          "icon"=>"cogs",
          "roles"=>["admin.root", "admin.admin"],

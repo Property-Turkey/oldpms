@@ -1062,11 +1062,11 @@ msgstr ""
 
 
 
+msgid "categories_list"
+msgstr "Categories List"
 
-
-
-
-
+msgid "category_name"
+msgstr "Category Name"
 
 
 msgid "CATEGORIES SEPARATOR"

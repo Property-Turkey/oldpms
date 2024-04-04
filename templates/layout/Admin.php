@@ -2020,6 +2020,31 @@
                 };
             }]);
 
+            app.directive('faIcons', function ($http, $compile) {
+                return {
+                    restrict: 'AE',
+                    link: function ($scope, elm, attr, ctrl) {
+
+                        elm.bind("input", onChange);
+
+                        function onChange() {
+                            $http.get('<?= $app_folder ?>/webroot/js/fa4.json').then((data) => {
+                                var html = '';
+                                for (var i = 0; i < data.data.length; i++) {
+                                    if (data.data[i].indexOf($scope.rec.category.category_configs.icon) > -1 || $scope.rec.category.category_configs.icon.length == 0) {
+                                        html += `
+                                        <a href="javascript:void(0);" ng-click="rec.category.category_configs.icon = '`+ data.data[i] + `'">
+                                            <i class="fa `+ data.data[i] + `"></i>
+                                        </a>`
+                                    }
+                                }
+                                $('.icons_div').html($compile(html)($scope));
+                            });
+                        }
+                    }
+                }
+            });
+
             app.directive('setChart', function($timeout) {
                 return {
                     restrict: 'A',

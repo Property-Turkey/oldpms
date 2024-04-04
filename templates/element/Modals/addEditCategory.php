@@ -1,5 +1,7 @@
 <?php
     $parent_id = isset($this->request->getParam('pass')[0]) ? $this->request->getParam('pass')[0] : 0;
+	$_pid = !isset($this->request->getParam('pass')[0]) ? 0 : $this->request->getParam('pass')[0];
+
 ?>
 
 <div class="modal fade" id="addEditCategory_mdl" tabindex="-1" role="dialog" aria-hidden="true">
@@ -19,7 +21,7 @@
 				<div class="x_content">
 
 				<button ng-click="
-							doGet('/admin/categories/index?list=1', 'list', 'categories');  rec.sale = {}; doClick('.close');
+							doGet('/admin/categories/index/<?= $_pid ?>?list=1', 'list', 'categories'); doClick('.close');
 							newEntity('category');
 						" id="category_btn" class="hideIt"></button>
 						<!-- data-dismiss="modal" aria-hidden="true"  -->
@@ -45,7 +47,7 @@
 							</div>
 							
 						</div>
-
+<!-- 
 						<div class="col-md-12 col-sm-12  form-group has-feedback">
 							<label><?=__('language_id')?></label>
 							<div class="div">
@@ -85,7 +87,7 @@
 							</div>
 							<div class="icons_div"></div>
 						</div>
-						
+						 -->
 						<?php /* // Tag input?>
 						<div class="col-md-12 col-sm-12  form-group has-feedback">
 							<label><?=__('category_name_')?></label>

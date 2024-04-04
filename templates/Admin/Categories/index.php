@@ -49,9 +49,14 @@ $_pid = !isset($this->request->getParam('pass')[0]) ? 0 : $this->request->getPar
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                     aria-expanded="false"><i class="fa fa-wrench"></i></a>
                                 <div class="dropdown-menu  <?= $currlang!='ar' ? 'dropdown-menu-right' : ''?>">
-                                    <a href ng-click="multiHandle('/admin/categories/delete')" class="dropdown-item">
+                                    <!-- <a href ng-click="multiHandle('/admin/categories/delete', )" class="dropdown-item">
                                         <i class="fa fa-trash"></i> <?=__('delete_selected')?>
+                                    </a> -->
+
+                                    <a href ng-click="multiHandle('/admin/categories/delete', selected, <?= $_pid ?>)" class="dropdown-item">
+                                        <i class="fa fa-trash"></i> <?= __('delete_selected')?>
                                     </a>
+
                                     <a href ng-click="multiHandle('/admin/categories/enable/1')" class="dropdown-item">
                                         <i class="fa fa-check"></i> <?=__('enable_selected')?>
                                     </a>
@@ -126,11 +131,11 @@ $_pid = !isset($this->request->getParam('pass')[0]) ? 0 : $this->request->getPar
                                 <div class="col-4 hideWeb grid_header"><?=__('actions')?></div>
                                 <div class="col-md-2 col-8 action">
                                     
-                                    <a href="javascript:void(0);" 
+                                    <!-- <a href="javascript:void(0);" 
                                         data-toggle="modal" data-target="#viewProject_mdl" class="inline-btn"
                                         ng-click="doGet('/admin/projects?id='+itm.id, 'rec', 'project'); curr_t = 'project';">
                                         <i class="fa fa-eye"></i> <?=__('view')?>
-                                    </a> &nbsp; 
+                                    </a> &nbsp;  -->
 
                                     <?php if( in_array( $authUser['user_role'], ['admin.root', 'admin.admin', 'admin.portfolio', 'admin.supervisor']) ){?>
                                         <a href ng-hide="('<?=$authUser['user_role']?>' == 'admin.portfolio' && '<?=$authUser['id']?>' != itm.user_id)"

@@ -1398,12 +1398,61 @@
                     return $http(requestObj)
                 }
 
-                $scope.multiHandle = function(url, tar) {
+                // $scope.multiHandle = function(url, tar) {
+                //     !tar ? tar = $scope.selected : tar;
+                //     if(Object.keys(tar).length < 1){
+                //         return showPNote('<?= __('note-message') ?>', '<?= __('is-selected-empty-msg') ?>', 'error');
+                //     }
+                //     !url ? url = $scope.path + '/' + $scope.currlang : $scope.path + '/' + $scope.currlang + url;
+
+                //     // console.log(tar)
+                //     var msg = '<?= __('delete_selected_records') ?>';
+                //     var method = "delete";
+
+                //     if (url.indexOf('enable/1') > -1) {
+                //         msg = '<?= __('enable_selected_records') ?>'
+                //     }
+                //     if (url.indexOf('enable/0') > -1) {
+                //         msg = '<?= __('disable_selected_records') ?>'
+                //     }
+                //     if (url.indexOf('enable/2') > -1) {
+                //         msg = '<?= __('sold_selected_records') ?>'
+                //     }
+                //     if (url.indexOf('assign/') > -1) {
+                //         msg = '<?= __('assign_selected_records') ?>'
+                //     }
+                //     if (url.indexOf('assign/publish') > -1) {
+                //         msg = '<?= __('publish_selected_records') ?>'
+                //     }
+                //     if (confirm(msg)) {
+
+                //         var ids = Object.keys(tar).filter(function(k) {
+                //             return tar[k] !== false;
+                //         });
+                //         // return console.log(ids.join())
+                //         _doRequest(url + '/' + ids.join(), false, method).then(function(res) {
+                //             if (res.data.redirect) {
+                //                 window.location.href = res.data.redirect
+                //             }
+                //             if (res.data.status == "SUCCESS") {
+                //                 $scope.selected = {}
+                //                 showPNote('<?= __('note-message') ?>', res.data.msg || '<?= __('multi-handling-success') ?>', 'success');
+                //                 setTimeout(function() {
+                //                     $scope.doSearch('dont_log');
+                //                     // $scope.doGet('/admin/' + ctrl.toLowerCase() + '/index?list=1&page='+$scope.paging.page, 'list', ctrl.toLowerCase());
+                //                 }, 1000)
+                //             } else {
+                //                 showPNote('<?= __('note-message') ?>', res.data.msg || '<?= __('multi-handling-fail') ?>', 'error');
+                //             }
+                //         })
+                //     }
+                // }
+
+                $scope.multiHandle = function (url, tar, _pid) {
                     !tar ? tar = $scope.selected : tar;
-                    if(Object.keys(tar).length < 1){
+                    if (Object.keys(tar).length < 1) {
                         return showPNote('<?= __('note-message') ?>', '<?= __('is-selected-empty-msg') ?>', 'error');
-                    }
-                    !url ? url = $scope.path + '/' + $scope.currlang : $scope.path + '/' + $scope.currlang + url;
+                    } !url ? url = $scope.path + '/' + $scope.currlang : $scope.path + '/' + $scope.currlang + url;
 
                     // console.log(tar)
                     var msg = '<?= __('delete_selected_records') ?>';
@@ -1426,23 +1475,29 @@
                     }
                     if (confirm(msg)) {
 
-                        var ids = Object.keys(tar).filter(function(k) {
+                        var ids = Object.keys(tar).filter(function (k) {
                             return tar[k] !== false;
                         });
                         // return console.log(ids.join())
-                        _doRequest(url + '/' + ids.join(), false, method).then(function(res) {
+                        _doRequest(url + '/' + ids.join(), false, method).then(function (res) {
                             if (res.data.redirect) {
                                 window.location.href = res.data.redirect
                             }
                             if (res.data.status == "SUCCESS") {
                                 $scope.selected = {}
-                                showPNote('<?= __('note-message') ?>', res.data.msg || '<?= __('multi-handling-success') ?>', 'success');
-                                setTimeout(function() {
-                                    $scope.doSearch('dont_log');
-                                    // $scope.doGet('/admin/' + ctrl.toLowerCase() + '/index?list=1&page='+$scope.paging.page, 'list', ctrl.toLowerCase());
-                                }, 1000)
+                                showPNote('<?= __('note-message') ?>', res.data.msg || '<?= __('multi-handling-success') ?>', 'greenBg');
+                                if(ctrl == 'categories'){
+                                    setTimeout(function () {
+                                        $scope.doGet('/admin/' + ctrl.toLowerCase() + '/index/'+ _pid + '?list=1', 'list', ctrl.toLowerCase());
+                                    }, 100)
+                                }else{
+                                    setTimeout(function () {
+                                        $scope.doGet('/admin/' + ctrl.toLowerCase() + '/index?list=1', 'list', ctrl.toLowerCase());
+                                    }, 100)
+                                }
+                                
                             } else {
-                                showPNote('<?= __('note-message') ?>', res.data.msg || '<?= __('multi-handling-fail') ?>', 'error');
+                                showPNote('<?= __('note-message') ?>', res.data.msg || '<?= __('multi-handling-fail') ?>', 'redBg');
                             }
                         })
                     }
@@ -2019,31 +2074,6 @@
                     }
                 };
             }]);
-
-            app.directive('faIcons', function ($http, $compile) {
-                return {
-                    restrict: 'AE',
-                    link: function ($scope, elm, attr, ctrl) {
-
-                        elm.bind("input", onChange);
-
-                        function onChange() {
-                            $http.get('<?= $app_folder ?>/webroot/js/fa4.json').then((data) => {
-                                var html = '';
-                                for (var i = 0; i < data.data.length; i++) {
-                                    if (data.data[i].indexOf($scope.rec.category.category_configs.icon) > -1 || $scope.rec.category.category_configs.icon.length == 0) {
-                                        html += `
-                                        <a href="javascript:void(0);" ng-click="rec.category.category_configs.icon = '`+ data.data[i] + `'">
-                                            <i class="fa `+ data.data[i] + `"></i>
-                                        </a>`
-                                    }
-                                }
-                                $('.icons_div').html($compile(html)($scope));
-                            });
-                        }
-                    }
-                }
-            });
 
             app.directive('setChart', function($timeout) {
                 return {

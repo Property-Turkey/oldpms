@@ -807,6 +807,10 @@ msgid "wizard"
 msgstr "Wizard"
 msgid "finish_and_close"
 msgstr "Finish & Close"
+
+msgid "save_finish_and_close"
+msgstr "Save & Close"
+
 msgid "the_seller_is_the_developer"
 msgstr "--- The seller is the developer ---"
 msgid "please_wait"

@@ -144,8 +144,8 @@ class ProjectsController extends AppController
                     "order"=>['Projects.'.$_col => $_dir],   
                     "contain"=>["Properties", "Users"],
                     "fields"=>[
-                        "Projects.id", "Projects.user_id", "project_title", "param_space", "param_totalunits",
-                        "adrs_country", "adrs_city", "adrs_region", "adrs_district", "Projects.rec_state", "Projects.stat_updated",
+                        "id", "user_id", "project_title", "param_space", "param_totalunits",
+                        "adrs_country", "adrs_city", "adrs_region", "adrs_district", "rec_state", "stat_updated",
                         "Users.user_fullname"
                         // "UserProperty.id", "UserProperty.rec_state", 
                     ],

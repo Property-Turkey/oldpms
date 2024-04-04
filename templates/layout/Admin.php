@@ -1129,7 +1129,7 @@
                                 if( obj[ clms[step][k] ].length > 0 ){ isWrong = false }
                             }
                         }
-                        if ( isWrong ) {
+                        if ( isWrong ) {toElm
                             showPNote('<?= __('note-message') ?>', '<?= __('please-fill-this-field') ?>: ' + (clm || clms[step][k]), 'error');
                             var error = {}
                             error[ clm || clms[step][k] ] = {"_empty":"<?=__('error_empty')?>"}

@@ -31,7 +31,14 @@ $steps_stats = [
                 </h4>
             </div>
             <div class="modal-body" id="accordion">
-
+            <div id="properties_preloader" class="preloader">
+                        <div>
+                            <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+                        </div>
+                        <div>
+                            <?= __('please_wait') ?>
+                        </div>
+                    </div>
                 <button type="button" id="property_btn" class="hideIt" ng-click="
                     newEntity('doc');
                     filesInfo.doc_file=[];
@@ -297,29 +304,29 @@ $steps_stats = [
 
                     <div class="col-md-12 col-sm-12">
 
-                        <button type="submit" id="properties_preloader" class="btn btn-info"
+                        <!-- <button type="submit" id="properties_preloader" class="btn btn-info"
                             ng-click="toElm();">
                             <span></span> <i class="fa fa-save"></i>
                             <?= __('save_and_continue') ?>
-                        </button>
+                        </button> -->
 
                         <button type="button" ng-click="
-                step2 = {
-                    isCurrentLocPrompet: true,
-                    isItInProjectPrompet: false,
-                    isMapShow: false,
-                    isProjectShow: false
-                };
-                rec.property.adrs_country = '';
-                rec.property.adrs_city = '';
-                rec.property.adrs_region = '';
-                rec.property.adrs_district = '';
-                rec.property.adrs_street = '';
-                rec.property.adrs_block = '';
-                rec.property.adrs_no = '';
-                rec.property.property_loc = '';
-                rec.property.project_id = '0';
-            " class="btn btn-warning">
+                            step2 = {
+                                isCurrentLocPrompet: true,
+                                isItInProjectPrompet: false,
+                                isMapShow: false,
+                                isProjectShow: false
+                            };
+                            rec.property.adrs_country = '';
+                            rec.property.adrs_city = '';
+                            rec.property.adrs_region = '';
+                            rec.property.adrs_district = '';
+                            rec.property.adrs_street = '';
+                            rec.property.adrs_block = '';
+                            rec.property.adrs_no = '';
+                            rec.property.property_loc = '';
+                            rec.property.project_id = '0';
+                        " class="btn btn-warning">
                             <span></span> <i class="fa fa-refresh"></i>
                             <?= __('reset') ?>
                         </button>
@@ -345,91 +352,91 @@ $steps_stats = [
                     </div>
 
 
-                        <div class="col-12 absMessage collapse" id="collapse2"  aria-labelledby="step2" data-parent="#accordion">
-                            <div class="x_title">
-                                <h2><i class="fa fa-file-text-o"></i>
-                                    <?= __('specs_sec') ?>
-                                </h2>
-                                <div class="clearfix"></div>
-                            </div>
+                    <div class="col-12 absMessage collapse" id="collapse2"  aria-labelledby="step2" data-parent="#accordion">
+                        <div class="x_title">
+                            <h2><i class="fa fa-file-text-o"></i>
+                                <?= __('specs_sec') ?>
+                            </h2>
+                            <div class="clearfix"></div>
+                        </div>
 
-                            <div class="x_content">
+                        <div class="x_content">
 
-                                <?php
-                                foreach ($this->Do->cat('PROP_SPECS.main') as $k => $spec) {
-                                    // if(in_array($spec, ['param_payment', 'param_ownership', 'param_deposit', 'param_bedrooms', 'param_ownertype', 'param_monthlytax'])){
-                                    //     continue;
-                                    // } 
-                                    $icon = $spec == 'param_titledeed' ? 'try' : 'info-circle';
-                                    $isRequired = '';
-                                    if (in_array($spec, ['param_isresale', 'param_iscitizenship', 'param_rooms', 'param_floor', 'param_buildage', 'param_grossspace'])) {
-                                        $isRequired = 'set-required';
+                            <?php
+                            foreach ($this->Do->cat('PROP_SPECS.main') as $k => $spec) {
+                                // if(in_array($spec, ['param_payment', 'param_ownership', 'param_deposit', 'param_bedrooms', 'param_ownertype', 'param_monthlytax'])){
+                                //     continue;
+                                // } 
+                                $icon = $spec == 'param_titledeed' ? 'try' : 'info-circle';
+                                $isRequired = '';
+                                if (in_array($spec, ['param_isresale', 'param_iscitizenship', 'param_rooms', 'param_floor', 'param_buildage', 'param_grossspace'])) {
+                                    $isRequired = 'set-required';
+                                }
+                                $list = $this->Do->cat('PROP_SPECS.' . $k);
+                                $type = 'select';
+                                if (!is_array($list)) {
+                                    $type = 'text';
+                                }
+                                if (is_array($list)) {
+                                    if (count($list) < 3) {
+                                        $type = 'radio';
                                     }
-                                    $list = $this->Do->cat('PROP_SPECS.' . $k);
-                                    $type = 'select';
-                                    if (!is_array($list)) {
-                                        $type = 'text';
-                                    }
-                                    if (is_array($list)) {
-                                        if (count($list) < 3) {
-                                            $type = 'radio';
-                                        }
-                                    }
-                                    if ($type == "radio") { ?>
+                                }
+                                if ($type == "radio") { ?>
 
-                                        <div class="col-md-6 col-sm-6 form-group has-feedback">
-                                            <label <?= $isRequired ?>>
-                                                <?= __($spec) ?>
+                                    <div class="col-md-6 col-sm-6 form-group has-feedback">
+                                        <label <?= $isRequired ?>>
+                                            <?= __($spec) ?>
+                                        </label>
+                                        <div class="div specsRadioBtn">
+                                            <label class="myradiobtn">
+                                                <input type="radio" ng-model="rec.property.<?= $spec ?>"
+                                                    name="<?= $spec ?>" value="1" /> <span></span>
+                                                <?= __('yes') ?>
+                                            </label>&nbsp;
+                                            <label class="myradiobtn">
+                                                <input type="radio" ng-model="rec.property.<?= $spec ?>"
+                                                    name="<?= $spec ?>" value="0" /> <span></span>
+                                                <?= __('no') ?>
                                             </label>
-                                            <div class="div specsRadioBtn">
-                                                <label class="myradiobtn">
-                                                    <input type="radio" ng-model="rec.property.<?= $spec ?>"
-                                                        name="<?= $spec ?>" value="1" /> <span></span>
-                                                    <?= __('yes') ?>
-                                                </label>&nbsp;
-                                                <label class="myradiobtn">
-                                                    <input type="radio" ng-model="rec.property.<?= $spec ?>"
-                                                        name="<?= $spec ?>" value="0" /> <span></span>
-                                                    <?= __('no') ?>
-                                                </label>
-                                            </div>
                                         </div>
+                                    </div>
 
-                                    <?php } else { ?>
+                                <?php } else { ?>
 
-                                        <div class="col-md-6 col-sm-6 form-group has-feedback">
-                                            <label <?= $isRequired ?>>
-                                                <?= __($spec) ?>
-                                            </label>
-                                            <div class="div">
-                                                <?= $this->Form->control($spec, [
-                                                    'class' => 'form-control has-feedback-left',
-                                                    'label' => false,
-                                                    'type' => $type,
-                                                    'ng-model' => 'rec.property.' . $spec,
-                                                    'options' => $type == 'select' ? $this->Do->lcl($list) : false,
-                                                    'mask-currency' => 'false',
-                                                    'config' => "{group:'.',decimal:'.', decimalSize: 0,indentation:''}",
-                                                ]) ?>
-                                                <span class="fa fa-<?= $icon ?> form-control-feedback left"
-                                                    aria-hidden="true"></span>
-                                            </div>
+                                    <div class="col-md-6 col-sm-6 form-group has-feedback">
+                                        <label <?= $isRequired ?>>
+                                            <?= __($spec) ?>
+                                        </label>
+                                        <div class="div">
+                                            <?= $this->Form->control($spec, [
+                                                'class' => 'form-control has-feedback-left',
+                                                'label' => false,
+                                                'type' => $type,
+                                                'ng-model' => 'rec.property.' . $spec,
+                                                'options' => $type == 'select' ? $this->Do->lcl($list) : false,
+                                                'mask-currency' => 'false',
+                                                'config' => "{group:'.',decimal:'.', decimalSize: 0,indentation:''}",
+                                            ]) ?>
+                                            <span class="fa fa-<?= $icon ?> form-control-feedback left"
+                                                aria-hidden="true"></span>
                                         </div>
+                                    </div>
 
-                                    <?php } ?>
                                 <?php } ?>
+                            <?php } ?>
 
-                                <div class="clearfix"></div>
+                            <div class="clearfix"></div>
 
-                                <div class="col-md-12 col-sm-12">
-                                    <button type="submit" id="properties_preloader" class="btn btn-info"
-                                        ng-click="toElm();">
-                                        <span></span> <i class="fa fa-save"></i>
-                                        <?= __('save_and_continue') ?>
-                                    </button>
-                                </div>
+                            <div class="col-md-12 col-sm-12">
+                                <!-- <button type="submit" id="properties_preloader" class="btn btn-info"
+                                    ng-click="toElm();">
+                                    <span></span> <i class="fa fa-save"></i>
+                                    <?= __('save_and_continue') ?>
+                                </button> -->
                             </div>
                         </div>
+                    </div>
                         
 
 
@@ -446,7 +453,7 @@ $steps_stats = [
                 
                     </div>
                     
-                    <div  id="collapse3" class="mb-2 collapse" aria-labelledby="step3" data-parent="#accordion">
+                    <div  id="collapse3" class="col-12 absMessage collapse" aria-labelledby="step3" data-parent="#accordion">
 
                         <div class="col-12 ">
                         <div class="x_title">
@@ -538,11 +545,11 @@ $steps_stats = [
                             </div>
 
                             <div class="">
-                                <button type="submit" id="properties_preloader" class="btn btn-info"
+                                <!-- <button type="submit" id="properties_preloader" class="btn btn-info"
                                     ng-click="toElm();">
                                     <span></span> <i class="fa fa-save"></i>
                                     <?= __('save_and_continue') ?>
-                                </button>
+                                </button> -->
                             </div>
                         </div>
                     </div>
@@ -563,7 +570,7 @@ $steps_stats = [
                         </div>
                     </div>
                     
-                    <div  id="collapse4" class="mb-2 collapse" aria-labelledby="step4" data-parent="#accordion">
+                    <div  id="collapse4" class="col-12 absMessage collapse" aria-labelledby="step4" data-parent="#accordion">
 
                             <div class="col-12 ">
                             <div class="x_title">
@@ -581,11 +588,11 @@ $steps_stats = [
                                     </div>
 
                                     <div class="col-md-12 col-sm-12">
-                                        <button type="submit" id="properties_preloader" class="btn btn-info"
+                                        <!-- <button type="submit" id="properties_preloader" class="btn btn-info"
                                             ng-click="toElm();">
                                             <span></span> <i class="fa fa-save"></i>
                                             <?= __('save_and_continue') ?>
-                                        </button>
+                                        </button> -->
                                     </div>
                                 <?php } else { ?>
 
@@ -615,7 +622,7 @@ $steps_stats = [
                         </div>
                     </div>
                     
-                    <div  id="collapse5" class="mb-2 collapse" aria-labelledby="step5" data-parent="#accordion">
+                    <div  id="collapse5" class="col-12 absMessage collapse" aria-labelledby="step5" data-parent="#accordion">
 
                     <div class="col-12 ">
                     <div class="x_title">
@@ -849,15 +856,15 @@ $steps_stats = [
                     </div>
 
                     <div class="col-md-12 col-sm-12">
-                        <button type="submit" id="properties_preloader" class="btn btn-info"
+                        <!-- <button type="submit" id="properties_preloader" class="btn btn-info"
                             ng-click="toElm()">
                             <span></span> <i class="fa fa-save"></i>
                             <?= __('save') ?>
-                        </button>
+                        </button> -->
                         <button type="submit" id="properties_preloader" class="btn btn-warning"
                             ng-click="isRedirect = true; toElm()">
                             <span></span> <i class="fa fa-save"></i>
-                            <?= __('finish_and_close') ?>
+                            <?= __('save_finish_and_close') ?>
                         </button>
                     </div>
                 </div>
@@ -867,7 +874,7 @@ $steps_stats = [
 
                     <?php // STEP 6 DOCS upload docs   ?>
 
-                    <div class="accordion col-12"data-toggle="collapse" data-target="#collapse6" aria-expanded="true" aria-controls="collapse6">
+                    <!-- <div class="accordion col-12"data-toggle="collapse" data-target="#collapse6" aria-expanded="true" aria-controls="collapse6">
                         <div class="card-header  text-center" id="step6">
                             <h2 class="mb-0">
                                 <button class="btn btn-link text-dark font-weight-bold" type="button">
@@ -877,7 +884,7 @@ $steps_stats = [
                         </div>
                     </div>
                     
-                    <div  id="collapse6" class="mb-2 collapse" aria-labelledby="step6" data-parent="#accordion">
+                    <div  id="collapse6" class="col-12 absMessage collapse" aria-labelledby="step6" data-parent="#accordion">
 
                         <div class="col-12 ">
                             <div class="x_title">
@@ -894,11 +901,24 @@ $steps_stats = [
                             </div>
                         </div>
                         
-                    </div>
+                    </div> -->
                     
 
                 </form>
+                <!-- <div class="col-md-12 col-sm-12">
+                        <button type="submit" id="properties_preloader" class="btn btn-info"
+                            ng-click="toElm()">
+                            <span></span> <i class="fa fa-save"></i>
+                            <?= __('save') ?>
+                        </button>
+                        <button type="submit" id="properties_preloader" class="btn btn-warning"
+                            ng-click="isRedirect = true; toElm()">
+                            <span></span> <i class="fa fa-save"></i>
+                            <?= __('finish_and_close') ?>
+                        </button>
+                    </div> -->
             </div>
+            
 
                     
         </div>

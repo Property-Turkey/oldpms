@@ -595,7 +595,9 @@ debug( $regions );
 
                 echo json_encode([
                     "status"=>"SUCCESS", "data"=> $this->Do->convertJson( $newRec ), 
-                    "redirect"=>$this->request->is(['post']) ? $this->app_folder."/admin/properties/wizard/".$newRec->id."?step=1" : false]); die();
+                    // "redirect"=>$this->request->is(['post']) ? $this->app_folder."/admin/properties/wizard/".$newRec->id."?step=1" : false
+                ]); 
+                    die();
             }
 
             echo json_encode(["status"=>"FAIL", "data"=>$rec->getErrors()]); die();
@@ -654,7 +656,7 @@ debug( $regions );
 
         $delRec=[];
         foreach(explode(",", $id."") as $k=>$rec_id){
-            $rec = $this->Properties->get($rec_id, ['contain'=>['Docs']]);
+            $rec = $this->Properties->get($rec_id);
             
             if( $delRec[$k] = $this->Properties->delete($rec) ){
                 $rec = $rec->toArray();

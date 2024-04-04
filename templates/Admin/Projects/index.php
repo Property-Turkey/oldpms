@@ -10,11 +10,9 @@ $params = http_build_query(($this->request->getQuery()));
 
 ?>
 <div class="right_col" role="main" ng-init="
-
-doGet('/admin/projects/index?list=1&page='+paging.page+'&<?= $params ?>', 'list', 'projects');
+        doGet('/admin/projects/index?list=1&page='+paging.page+'&<?= $params ?>', 'list', 'projects');
         doGet('/configs/cat/all', 'list', 'categories');
 
-        
     ">
     <div class="">
         <div class="page-title">

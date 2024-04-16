@@ -18,14 +18,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
     <!-- jQuery -->
-    <?php echo $this->Html->script('/gentela/vendors/jquery/dist/jquery.min.js') ?>
+    <?php //echo $this->Html->script('/gentela/vendors/jquery/dist/jquery.min.js') ?>
 
     <!-- Bootstrap -->
     <?php
     // if($currlang == 'ar'){
     //     echo $this->Html->css('bootstrap-rtl.min');
     // }else{
-    echo $this->Html->css('/gentela/vendors/bootstrap/dist/css/bootstrap.min.css');
+    //echo $this->Html->css('/gentela/vendors/bootstrap/dist/css/bootstrap.min.css');
     // }
     ?>
     <!-- Font Awesome -->
@@ -33,7 +33,7 @@
     <!-- NProgress -->
     <?php //echo $this->Html->css('/gentela/vendors/nprogress/nprogress.css') ?>
     <!-- Animate -->
-    <?php echo $this->Html->css('/gentela/vendors/animate.css/animate.min.css') ?>
+    <?php //echo $this->Html->css('/gentela/vendors/animate.css/animate.min.css') ?>
     <!-- iCheck -->
     <?php //echo $this->Html->css('/gentela/vendors/iCheck/skins/flat/green.css')
     ?>
@@ -41,14 +41,14 @@
     <?php //echo $this->Html->css('/gentela/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css')
     ?>
     <!-- PNotify -->
-    <?php echo $this->Html->css('/gentela/vendors/pnotify/dist/pnotify.css') ?>
-    <?php echo $this->Html->css('/gentela/vendors/pnotify/dist/pnotify.buttons.css') ?>
-    <?php echo $this->Html->css('/gentela/vendors/pnotify/dist/pnotify.nonblock.css') ?>
+    <?php //echo $this->Html->css('/gentela/vendors/pnotify/dist/pnotify.css') ?>
+    <?php //echo $this->Html->css('/gentela/vendors/pnotify/dist/pnotify.buttons.css') ?>
+    <?php //echo $this->Html->css('/gentela/vendors/pnotify/dist/pnotify.nonblock.css') ?>
     <!-- JQVMap -->
     <?php //echo $this->Html->css('/gentela/vendors/jqvmap/dist/jqvmap.min.css')
     ?>
     <!-- bootstrap-daterangepicker -->
-    <?php echo $this->Html->css('/gentela/vendors/bootstrap-daterangepicker/daterangepicker.css') ?>
+    <?php //echo $this->Html->css('/gentela/vendors/bootstrap-daterangepicker/daterangepicker.css') ?>
     <!-- NG Tags Input-->
     <?php echo $this->Html->css('ng-tags-input.min') ?>
     <!-- Bootstrap Multiple Select -->
@@ -56,9 +56,10 @@
     <!-- Range NoUi slider -->
     <?php echo $this->Html->css('nouislider.min') ?>
     <!-- Custom Theme Style -->
-    <?php echo $this->Html->css('/gentela/build/css/custom.min.css') ?>
+    <?php //echo $this->Html->css('/gentela/build/css/custom.min.css') ?> 
     <!-- MY Custom Theme Style -->
-    <?php echo $this->Html->css('gentela_style') ?>
+    <!-- <?php echo $this->Html->css('gentela_style') ?> -->
+    <?php echo $this->Html->css('all') ?>
 
     <?php
     if($currlang == 'ar'){
@@ -72,80 +73,50 @@
 
 
 <body class="nav-md" ng-app="app" ng-controller="ctrl as ctrl">
-    <div class="container body">
-        <div class="main_container tempHide" remove-temp-hide="">
 
-            <!-- SIDE BAR -->
-            <div class="col-md-3 left_col">
-                <div class=" scroll-view">
-                    <div class="navbar nav_title" style="border: 0;">
-                        <a href="<?= $app_folder ?>/<?= $currlang ?>/admin" class="site_title">
-                            <?= $this->Html->image('/img/favicon.png', ['alt' => '', 'height' => '30']) ?>
-                            <span><?= __('sitename') ?></span>
-                        </a>
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <?php echo $this->element('gentela_sidetopbar') ?>
-
-                    <br />
-
-                    <?php echo $this->element('gentela_sidebar') ?>
-
-                    <?php echo $this->element('gentela_sidefooter') ?>
-                </div>
-
-            </div>
-            <div class="bg-sidemenu" ng-click="showMenu('hide')"></div>
+            
 
 
-            <!-- CONTENT TOP -->
-            <?php echo $this->element('gentela_topbar') ?>
 
-            <!-- CONTENT BODY -->
-            <?php echo $this->Flash->render() ?>
-            <?php echo $this->fetch('content') ?>
-
-            <!-- FOOTER -->
-            <?php echo $this->element('gentela_footer') ?>
-
-        </div>
+    <!-- CONTENT BODY -->
+    <?php echo $this->fetch('content') ?> 
 
 
-    </div>
     <div id="imgHolder" class="imgHolder" onClick="this.setAttribute('style', 'opacity:0; visibility:hidden;')"></div>
     <div id="slideHolder" class="imgHolder slideHolder" ></div>
 
 
     <!--    JAVASCRIPT      -->
+
+    
     <!-- Angular -->
     <?php echo $this->Html->script('angular') ?>
     <!-- NG Tags Input-->
+    
     <?php echo $this->Html->script('ng-tags-input.min') ?>
     <!-- Angular Sanitize -->
     <?php echo $this->Html->script('angular-sanitize.min') ?>
     <!-- Angular Animate -->
     <?php echo $this->Html->script('angular-animate.min') ?>
     <!-- Bootstrap -->
-    <?php echo $this->Html->script('/gentela/vendors/bootstrap/dist/js/bootstrap.bundle.min.js') ?>
+    <?php //echo $this->Html->script('/gentela/vendors/bootstrap/dist/js/bootstrap.bundle.min.js') ?>
     <!-- FastClick -->
     <?php //echo $this->Html->script('/gentela/vendors/fastclick/lib/fastclick.js') 
     ?>
     <!-- NProgress -->
-    <?php echo $this->Html->script('/gentela/vendors/nprogress/nprogress.js') ?>
+    <?php //echo $this->Html->script('/gentela/vendors/nprogress/nprogress.js') ?>
     <!-- Chart.js -->
-    <?php echo $this->Html->script('/gentela/vendors/Chart.js/dist/Chart.min.js') ?>
+    <?php //echo $this->Html->script('/gentela/vendors/Chart.js/dist/Chart.min.js') ?>
     <!-- gauge.js -->
     <?php //echo $this->Html->script('/gentela/vendors/gauge.js/dist/gauge.min.js') 
     ?>
     <!-- bootstrap-progressbar -->
-    <?php echo $this->Html->script('/gentela/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') ?>
+    <?php //echo $this->Html->script('/gentela/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') ?>
 
     <!-- PNotify -->
-    <?php echo $this->Html->script('/gentela/vendors/pnotify/dist/pnotify.js') ?>
-    <?php echo $this->Html->script('/gentela/vendors/pnotify/dist/pnotify.buttons.js') ?>
-    <?php echo $this->Html->script('/gentela/vendors/pnotify/dist/pnotify.nonblock.js') ?>
+    <?php //echo $this->Html->script('/gentela/vendors/pnotify/dist/pnotify.js') ?>
+    <?php //echo $this->Html->script('/gentela/vendors/pnotify/dist/pnotify.buttons.js') ?>
+    <?php //echo $this->Html->script('/gentela/vendors/pnotify/dist/pnotify.nonblock.js') ?>
 
     <!-- iCheck -->
     <?php //echo $this->Html->script('/gentela/vendors/iCheck/icheck.min.js') 
@@ -182,21 +153,27 @@
     <?php //echo $this->Html->script('/gentela/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js') 
     ?>
     <!-- bootstrap-daterangepicker -->
-    <?php echo $this->Html->script('/gentela/vendors/moment/min/moment.min.js') ?>
-    <?php echo $this->Html->script('/gentela/vendors/bootstrap-daterangepicker/daterangepicker.js') ?>
+    <?php // echo $this->Html->script('/gentela/vendors/moment/min/moment.min.js') ?>
+    <?php //echo $this->Html->script('/gentela/vendors/bootstrap-daterangepicker/daterangepicker.js') ?>
     <!-- CKEditor -->
-    <?php echo $this->Html->script('/gentela/vendors/ckeditor4.13.0/ckeditor') ?>
-    <?php echo $this->Html->script('/gentela/vendors/ckeditor4.13.0/angular-ckeditor') ?>
+    <?php //echo $this->Html->script('/gentela/vendors/ckeditor4.13.0/ckeditor') ?>
+    <?php //echo $this->Html->script('/gentela/vendors/ckeditor4.13.0/angular-ckeditor') ?>
     <!-- Range NoUi slider -->
-    <?php echo $this->Html->script('nouislider.min') ?>
+    
     <!-- Bootstrap Multiple Select -->
-    <?php echo $this->Html->script('bootstrap-select.min') ?>
+    <?php //echo $this->Html->script('bootstrap-select.min') ?>
+
+    <?php //echo $this->Html->script('bootstrap.min') ?>
     <!-- Custom Theme Scripts -->
-    <?php echo $this->Html->script('/gentela/build/js/custom.min') ?>
     <!-- JQuery Mask Money -->
-    <?php echo $this->Html->script('jquery.maskMoney.min') ?>
+    <?php echo $this->Html->script('jquery') ?>
     <!-- JQuery Mask Money -->
     <?php echo $this->Html->script('angularjs-currency-input-mask') ?>
+    <?php echo $this->Html->script('owl.carousel') ?>
+
+    <?php echo $this->Html->script('all.js') ?>
+
+
 
     <?php if ($isMap==1) { ?>
         <script src="https://maps.googleapis.com/maps/api/js?key=<?= $gmapKey ?>&sensor=false&libraries=places&language=en"></script>
@@ -520,7 +497,7 @@
             
             var __ = this;
 
-            var app = angular.module('app', ['ckeditor', 'ngAnimate', 'ngSanitize', 'ngTagsInput', 'cur.$mask']); //, 'gm', '' 
+            var app = angular.module('app', [ 'ngAnimate', 'ngSanitize', 'ngTagsInput', 'cur.$mask']); //, 'gm', '' 
             app.controller('ctrl', function($scope, $http, $location, $timeout, $q, $compile, $filter, $interval) {
                 
                 $scope.filesInfo = { property_photos:[], project_photos:[], doc_file:[]};

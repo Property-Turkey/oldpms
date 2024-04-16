@@ -249,9 +249,9 @@ class UsersController extends AppController
         }
 
         // PROPS PRICES
-        // $currCurrency = $this->Do->get('currencies')[$this->currCurrency];
-        // $currCurrency_icon = $this->Do->get('currencies_icons')[$this->currCurrency];
-        // $block = floor($this->Do->currencyConverter("TRY", $currCurrency, 500000));
+        $currCurrency = $this->Do->get('currencies')[$this->currCurrency];
+        $currCurrency_icon = $this->Do->get('currencies_icons')[$this->currCurrency];
+        $block = floor($this->Do->currencyConverter("TRY", $currCurrency, 500000));
         $prop_prices_q = $Properties->find('all', [
             'conditions' => ['property_price >' => 0],
             'fields' => ['id', 'property_price', 'property_currency']
@@ -260,13 +260,13 @@ class UsersController extends AppController
         $prices = ['items' => [], 'values' => [], 'labels' => []];
         foreach ($prop_prices_q as &$itm) {
             $from = $this->Do->get('currencies')[empty($itm->property_currency) ? 3 : $itm->property_currency];
-            // $itm->converted_price = floor($this->Do->currencyConverter($from, $currCurrency, $itm->property_price));
-            // $range_num = floor($itm->converted_price / $block);
-            // $prices['values'][$range_num] = isset($prices['values'][$range_num]) ? $prices['values'][$range_num] + 1 : 1;
+            $itm->converted_price = floor($this->Do->currencyConverter($from, $currCurrency, $itm->property_price));
+            $range_num = floor($itm->converted_price / $block);
+            $prices['values'][$range_num] = isset($prices['values'][$range_num]) ? $prices['values'][$range_num] + 1 : 1;
         }
         arsort($prices['values']);
         foreach ($prices['values'] as $k => $v) {
-            // $prices['labels'][$k] = $currCurrency_icon . ($block * ($k - 1)) . ' - ' . $currCurrency_icon . ($block * ($k)) . ' ' . $currCurrency;
+            $prices['labels'][$k] = $currCurrency_icon . ($block * ($k - 1)) . ' - ' . $currCurrency_icon . ($block * ($k)) . ' ' . $currCurrency;
         }
 
         $prices['values'] = array_values($prices['values']);

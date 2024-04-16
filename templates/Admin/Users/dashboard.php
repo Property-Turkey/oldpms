@@ -1,449 +1,920 @@
-<?php
-$from = !isset($_GET['from']) ? date('Y-m-d', strtotime('first day of this month')) : $_GET['from'];
-$to = !isset($_GET['to']) ? date('Y-m-d') : $_GET['to'];
-?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font Awesome Pro -->
+    <!-- <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css"
+    /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-<!-- doGet('/admin/configs/statistics', 'rec', 'stats');
-      doGetDelay('/admin/configs/notifications', 'rec', 'notifications'); -->
-<div class="right_col" role="main" ng-init="
-      doGet('/admin/users/dashboard', 'rec', 'dashboard');
-   ">
-   <div class="" ng-init="rec.role = '<?=$authUser['user_role']?>'">
-      <div class="page-title" style="padding: 10px;">
-         <div class=" col-12 col-sm-6 col-md-6  side_div1">
-            <h3><?= __('general_stat') ?></h3>
-         </div>
-         <div class=" col-12 col-sm-6 col-md-6 side_div2">
-            <span class="icn">
-               <?= $this->element('datePicker', ['from' => $from, 'to' => $to]) ?>
-            </span>
-            <?php  if(in_array($authUser['user_role'], ['admin.root']) || isset($authUser['user_original_role'])){?>
-            <span class="icn">
-               <?=$this->Form->control('role', [
-                  'type'=>'select', 
-                  'options'=>$this->Do->lcl( $this->Do->get('AdminRoles'), false, false ),
-                  'label'=>false,
-                  'class'=>'form-control',
-                  'ng-model'=>'rec.role',
-                  'ng-change'=>"doGet('/admin/configs/switch-role/'+rec.role)"
-               ])?>
-            </span>
-            <?php }?>
-         </div>
+    <link rel="stylesheet" href="css/all.css" />
+    <title>Dubai</title>
+  </head>
+  <body>
+    <!-- Headr -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight"
+          aria-controls="offcanvasRight"
+          class="fa-solid fa-bars"
+        ></i>
+      
+      </button>
+        <a class="navbar-brand" href="#"
+          ><img src="img/Logo.svg" alt="logo"
+        /></a>
+        <div class="hidden">
+          <div class="dropdown">
+            
+            <a href="#" data-bs-toggle="dropdown" aria-expanded="false"><img src="img/00_Icons/dollar_gold.svg" alt="svg"></a>
+            <ul class="dropdown-menu">
+              <li></li>
+
+            </ul>
+          </div>
+          <a href="#"><img src="img/00_Icons/07_Phone.svg" alt="svg"></a>
+        </div>
+       
+        <div
+          class="offcanvas offcanvas-end"
+          tabindex="-1"
+          id="offcanvasRight"
+          aria-labelledby="offcanvasRightLabel"
+        >
+          <div class="offcanvas-header">
+            <i
+              class="fa-solid fa-xmark"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></i>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Properties</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Resale</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Developers</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+            </ul>
+
+            <div class="big-btn">
+              <select class="form-select" aria-label="Default select example">
+                <option selected>$</option>
+                <option value="1"></option>
+             
+              </select>
+              <button
+                class="btn-big-gold"
+                data-bs-toggle="modal"
+                data-bs-target="#contactModal"
+              >
+                <img src="img/00_Icons/15_FreeCon +.svg" alt="svg" /> FREE
+                CONSULTATION
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- End Headr -->
+    <!-- Start Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="content">
+          <div class="left">
+            <h1 class="title">HIGH INCOME REAL ESTATE IN UAE</h1>
+            <div class="btns">
+              <button class="gold-btn dark-gold-btn"   data-bs-toggle="modal"
+              data-bs-target="#contactModal">LEAVE A REQUEST</button>
+            </div>
+          </div>
+          <div class="right" id="Right">
+            <div class="icon">
+              <img id="close-icon" src="img/00_Icons/03_close.svg" alt="close" />
+            </div>
+            <nav>
+              <div class="nav btn-group" id="nav-tab" role="tablist">
+                <button
+                  class="nav-link active"
+                  id="Primary-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#Primary"
+                  type="button"
+                  role="tab"
+                  aria-controls="Primary"
+                  aria-selected="true"
+                >
+                  Primary
+                </button>
+                <button
+                  class="nav-link"
+                  id="Secondary-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#Secondary"
+                  type="button"
+                  role="tab"
+                  aria-controls="Secondary"
+                  aria-selected="false"
+                >
+                  Secondary
+                </button>
+              </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+              <div
+                class="tab-pane fade show active"
+                id="Primary"
+                role="tabpanel"
+                aria-labelledby="Primary-tab"
+                tabindex="0"
+              >
+                <form action="">
+                  <div class="inputs">
+                    <div class="input">
+                      <p>City</p>
+                      <select
+                        class="form-select"
+                        aria-label="Default select example"
+                      >
+                        <option selected>Dubai</option>
+                      </select>
+                    </div>
+                    <div class="input">
+                      <p>Property Type</p>
+                      <select
+                        class="form-select"
+                        aria-label="Default select example"
+                      >
+                        <option selected>Apartment</option>
+                      </select>
+                    </div>
+                    <div class="input">
+                      <p>Bedrooms</p>
+                      <select
+                        class="form-select"
+                        aria-label="Default select example"
+                      >
+                        <option selected>2</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="btm">
+                    <div class="top">
+                      <p>Price Range</p>
+                      <ul>
+                        <li class="active">USD</li>
+                        <li>EUR</li>
+                        <li>AED</li>
+                        <li>GBP</li>
+                      </ul>
+                    </div>
+                    <div class="body">
+                      <div class="inpt">
+                        <input type="text" placeholder="Min 100,000" />
+                      </div>
+                      <div class="inpt">
+                        <input type="text" placeholder="Max 1,000,000" />
+                      </div>
+                    </div>
+                    <div class="btns">
+                      <button class="gold-btn dark-gold-btn">
+                        Show 111 Properites
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="Secondary"
+                role="tabpanel"
+                aria-labelledby="Secondary-tab"
+                tabindex="0"
+              >
+                <form action="">
+                  <div class="inputs">
+                    <div class="input">
+                      <p>City</p>
+                      <select
+                        class="form-select"
+                        aria-label="Default select example"
+                      >
+                        <option selected>Dubai</option>
+                      </select>
+                    </div>
+                    <div class="input">
+                      <p>Property Type</p>
+                      <select
+                        class="form-select"
+                        aria-label="Default select example"
+                      >
+                        <option selected>Apartment</option>
+                      </select>
+                    </div>
+                    <div class="input">
+                      <p>Bedrooms</p>
+                      <select
+                        class="form-select"
+                        aria-label="Default select example"
+                      >
+                        <option selected>2</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="btm">
+                    <div class="top">
+                      <p>Price Range</p>
+                      <ul>
+                        <li><a href="#" class="active">USD</a></li>
+                        <li><a href="#">EUR</a></li>
+                        <li><a href="#">AED</a></li>
+                        <li><a href="#">GBP</a></li>
+                      </ul>
+                    </div>
+                    <div class="body">
+                      <div class="inpt">
+                        <input type="text" placeholder="Min 100,000" />
+                      </div>
+                      <div class="inpt">
+                        <input type="text" placeholder="Max 1,000,000" />
+                      </div>
+                    </div>
+                    <div class="btns">
+                      <button class="gold-btn dark-gold-btn">
+                        Show 111 Properites
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="clearfix"></div>
+      <div class="over-lay"></div>
+      <!-- <div class="image">
+        <img src="img/01_Hero.webp" class="mw-100" alt="background" />
+      </div> -->
+    </section>
+    <!-- End Hero -->
 
-      <div class="row">
-
-         <div id="main_preloader" class="preloader col-12">
-            <div>
-               <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+    <!-- Start Featured -->
+    <section class="featured">
+      <div class="container">
+        <div class="sec-title gold">
+          <h1>Featured</h1>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="owl-carousel owl-theme" id="nonloop">
+          <div class="item">
+            <p class="top">
+              Apartment in<br />Executive Towers<br />Business Bay Dubai
+            </p>
+            <div class="image">
+              <div class="overlay"></div>
+              <img src="img/02_CardImage.webp" alt="text" />
             </div>
-            <div><?= __('please_wait') ?></div>
-         </div>
+            <div class="text">
+              <h1>$625,000</h1>
+              <div class="icons">
+                <p>
+                  <img src="img/00_Icons/Location_white.svg" alt="svg" /> Dubai
+                </p>
+                <p><img src="img/00_Icons/beds_white.svg" alt="svg" /> 1+1</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <p class="top">
+              Apartment in<br />Executive Towers<br />Business Bay Dubai
+            </p>
+            <div class="image">
+              <div class="overlay"></div>
+              <img src="img/02_CardImage.webp" alt="text" />
+            </div>
+            <div class="text">
+              <h1>$625,000</h1>
+              <div class="icons">
+                <p>
+                  <img src="img/00_Icons/Location_white.svg" alt="svg" /> Dubai
+                </p>
+                <p><img src="img/00_Icons/beds_white.svg" alt="svg" /> 1+1</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <p class="top">
+              Apartment in<br />Executive Towers<br />Business Bay Dubai
+            </p>
+            <div class="image">
+              <div class="overlay"></div>
+              <img src="img/02_CardImage.webp" alt="text" />
+            </div>
+            <div class="text">
+              <h1>$625,000</h1>
+              <div class="icons">
+                <p>
+                  <img src="img/00_Icons/Location_white.svg" alt="svg" /> Dubai
+                </p>
+                <p><img src="img/00_Icons/beds_white.svg" alt="svg" /> 1+1</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <p class="top">
+              Apartment in<br />Executive Towers<br />Business Bay Dubai
+            </p>
+            <div class="image">
+              <div class="overlay"></div>
+              <img src="img/02_CardImage.webp" alt="text" />
+            </div>
+            <div class="text">
+              <h1>$625,000</h1>
+              <div class="icons">
+                <p>
+                  <img src="img/00_Icons/Location_white.svg" alt="svg" /> Dubai
+                </p>
+                <p><img src="img/00_Icons/beds_white.svg" alt="svg" /> 1+1</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <p class="top">
+              Apartment in<br />Executive Towers<br />Business Bay Dubai
+            </p>
+            <div class="image">
+              <div class="overlay"></div>
+              <img src="img/02_CardImage.webp" alt="text" />
+            </div>
+            <div class="text">
+              <h1>$625,000</h1>
+              <div class="icons">
+                <p>
+                  <img src="img/00_Icons/Location_white.svg" alt="svg" /> Dubai
+                </p>
+                <p><img src="img/00_Icons/beds_white.svg" alt="svg" /> 1+1</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <p class="top">
+              Apartment in<br />Executive Towers<br />Business Bay Dubai
+            </p>
+            <div class="image">
+              <div class="overlay"></div>
+              <img src="img/02_CardImage.webp" alt="text" />
+            </div>
+            <div class="text">
+              <h1>$625,000</h1>
+              <div class="icons">
+                <p>
+                  <img src="img/00_Icons/Location_white.svg" alt="svg" /> Dubai
+                </p>
+                <p><img src="img/00_Icons/beds_white.svg" alt="svg" /> 1+1</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <p class="top">
+              Apartment in<br />Executive Towers<br />Business Bay Dubai
+            </p>
+            <div class="image">
+              <div class="overlay"></div>
+              <img src="img/02_CardImage.webp" alt="text" />
+            </div>
+            <div class="text">
+              <h1>$625,000</h1>
+              <div class="icons">
+                <p>
+                  <img src="img/00_Icons/Location_white.svg" alt="svg" /> Dubai
+                </p>
+                <p><img src="img/00_Icons/beds_white.svg" alt="svg" /> 1+1</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <p class="top">
+              Apartment in<br />Executive Towers<br />Business Bay Dubai
+            </p>
+            <div class="image">
+              <div class="overlay"></div>
+              <img src="img/02_CardImage.webp" alt="text" />
+            </div>
+            <div class="text">
+              <h1>$625,000</h1>
+              <div class="icons">
+                <p>
+                  <img src="img/00_Icons/Location_white.svg" alt="svg" /> Dubai
+                </p>
+                <p><img src="img/00_Icons/beds_white.svg" alt="svg" /> 1+1</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="btm">
+          <div class="content">
+            <h1>
+              Do you need help finding<br />The perfect assets for your
+              investment?
+            </h1>
+            <div class="btns">
+              <button class="gold-btn big-btn">GET A PERSONAL OFFER</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Featured -->
+    <!-- Start Developers -->
+    <section class="featured" id="developer">
+      <div class="container">
+        <div class="sec-title gold">
+          <h1>Developers</h1>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="owl-carousel owl-theme" id="nonloop2">
+          <div class="item">
+            <p class="top">Developer Name</p>
+            <div class="image">
+              <div class="over-lay"></div>
+              <img src="img/03_DeveloperCards.webp" alt="text" />
+            </div>
+          </div>
+          <div class="item">
+            <p class="top">Developer Name</p>
+            <div class="image">
+              <div class="over-lay"></div>
+              <img src="img/03_DeveloperCards.webp" alt="text" />
+            </div>
+          </div>
+          <div class="item">
+            <p class="top">Developer Name</p>
+            <div class="image">
+              <div class="over-lay"></div>
+              <img src="img/03_DeveloperCards.webp" alt="text" />
+            </div>
+          </div>
+          <div class="item">
+            <p class="top">Developer Name</p>
+            <div class="image">
+              <div class="over-lay"></div>
+              <img src="img/03_DeveloperCards.webp" alt="text" />
+            </div>
+          </div>
+          <div class="item">
+            <p class="top">Developer Name</p>
+            <div class="image">
+              <div class="over-lay"></div>
+              <img src="img/03_DeveloperCards.webp" alt="text" />
+            </div>
+          </div>
+          <div class="item">
+            <p class="top">Developer Name</p>
+            <div class="image">
+              <div class="over-lay"></div>
+              <img src="img/03_DeveloperCards.webp" alt="text" />
+            </div>
+          </div>
+          <div class="item">
+            <p class="top">Developer Name</p>
+            <div class="image">
+              <div class="over-lay"></div>
+              <img src="img/03_DeveloperCards.webp" alt="text" />
+            </div>
+          </div>
+          <div class="item">
+            <p class="top">Developer Name</p>
+            <div class="image">
+              <div class="over-lay"></div>
+              <img src="img/03_DeveloperCards.webp" alt="text" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Developers -->
+    <!-- Start News -->
+    <section class="news">
+      <div class="container">
+        <div class="sec-title gold">
+          <h1>News</h1>
+        </div>
+      </div>
+      <div class="contaier-fluid">
+        <div class="owl-carousel owl-theme" id="News">
+          <div class="item" data-merge="1">
+            <div class="image">
+              <img src="img/02_CardImage.webp" alt="test" />
+            </div>
+            <div class="item-body">
+              <div class="text">
+                <strong>05.03.2024</strong>
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Necessitatibus delectus nam, in libero, accusantium voluptatum
+                  ex veniam nesciunt, iusto totam quidem et fugiat asperiores.
+                  Nam harum provident id incidunt eius odio voluptate blanditiis
+                  unde molestias modi itaque, ipsa quibusdam accusantium
+                  voluptatum ad laboriosam vitae sequi amet aspernatur dolorem!
+                  Et corporis laudantium tenetur deserunt amet suscipit iusto
+                  soluta eum doloremque animi iste omnis dolorum, ea ducimus.
+                </p>
+              </div>
 
-         <?php // NUMBERS   
-         ?>
-         <div class="col-12">
-            <div class="">
-               <?php //Properties 
-               ?>
-               <div class=" col-md-4 col-sm-6 tile_div">
+              <a href="#">Learn more</a>
+            </div>
+          </div>
+          <div class="item" data-merge="1">
+            <div class="image">
+              <img src="img/02_CardImage.webp" alt="test" />
+            </div>
+            <div class="item-body">
+              <div class="text">
+                <strong>05.03.2024</strong>
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Necessitatibus delectus nam, in libero, accusantium voluptatum
+                  ex veniam nesciunt, iusto totam quidem et fugiat asperiores.
+                  Nam harum provident id incidunt eius odio voluptate blanditiis
+                  unde molestias modi itaque, ipsa quibusdam accusantium
+                  voluptatum ad laboriosam vitae sequi amet aspernatur dolorem!
+                  Et corporis laudantium tenetur deserunt amet suscipit iusto
+                  soluta eum doloremque animi iste omnis dolorum, ea ducimus.
+                </p>
+              </div>
 
-                  <div class="notifications_div">
-                     <a href="<?= $app_folder ?>/admin/properties<?= $authUser['user_role'] == 'admin.content' ? '' : '?from='.$authUser['stat_lastlogin'] ?>" ng-if="rec.dashboard.notifications.new_properties>0" class="badge badge-success noteItm">
-                        <i class="fa fa-bell"></i> {{rec.dashboard.notifications.new_properties}} <?= __('new') ?>
-                     </a>
-                     <a href="<?= $app_folder ?>/admin/properties?stat_updated=0" ng-if="rec.dashboard.notifications.new_outdated_properties>0" class="badge badge-danger noteItm">
-                        <i class="fa fa-retweet"></i> {{rec.dashboard.notifications.new_outdated_properties}} <?= __('outdated') ?>
-                     </a>
-                  </div>
-                  
-                  <a href="<?= $app_folder ?>/admin/properties" class="tile_div_content">
-                     <span class="count_top"><i class="fa fa-building"></i> <?= __('properties') ?></span>
-                     <div class="count">
-                        <ii>{{rec.dashboard.stats.numbers.total_active_properties}}</ii>/
-                        <small class="grayText">{{rec.dashboard.stats.numbers.total_inactive_properties}}</small>
-                     </div>
-                     <span class="count_bottom"><?= __('active') ?>/
-                        <span class="grayText"><?= __('inactive') ?></span>
-                     </span>
-                  </a>
-               </div>
+              <a href="#">Learn more</a>
+            </div>
+          </div>
+          <div class="item" data-merge="1">
+            <div class="image">
+              <img src="img/02_CardImage.webp" alt="test" />
+            </div>
+            <div class="item-body">
+              <div class="text">
+                <strong>05.03.2024</strong>
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Necessitatibus delectus nam, in libero, accusantium voluptatum
+                  ex veniam nesciunt, iusto totam quidem et fugiat asperiores.
+                  Nam harum provident id incidunt eius odio voluptate blanditiis
+                  unde molestias modi itaque, ipsa quibusdam accusantium
+                  voluptatum ad laboriosam vitae sequi amet aspernatur dolorem!
+                  Et corporis laudantium tenetur deserunt amet suscipit iusto
+                  soluta eum doloremque animi iste omnis dolorum, ea ducimus.
+                </p>
+              </div>
 
-               <?php //Offices 
-               if (in_array($authUser['user_role'], ['admin.admin', 'admin.root'])) {
-               ?>
-                  <!-- <div class=" col-md-4 col-sm-6 col-6 tile_div">
-                     <a href="<?= $app_folder ?>/admin/offices" class="tile_div_content">
-                        <span class="count_top"><i class="fa fa-briefcase"></i> <?= __('offices') ?></span>
-                        <div class="count">
-                           <ii>{{rec.dashboard.stats.numbers.total_offices}}</ii>
-                        </div>
-                        <span class="count_bottom"><?= __('total') ?>
-                        </span>
-                     </a>
-                  </div> -->
-               <?php } ?>
+              <a href="#">Learn more</a>
+            </div>
+          </div>
+          <div class="item" data-merge="1">
+            <div class="image">
+              <img src="img/02_CardImage.webp" alt="test" />
+            </div>
+            <div class="item-body">
+              <div class="text">
+                <strong>05.03.2024</strong>
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Necessitatibus delectus nam, in libero, accusantium voluptatum
+                  ex veniam nesciunt, iusto totam quidem et fugiat asperiores.
+                  Nam harum provident id incidunt eius odio voluptate blanditiis
+                  unde molestias modi itaque, ipsa quibusdam accusantium
+                  voluptatum ad laboriosam vitae sequi amet aspernatur dolorem!
+                  Et corporis laudantium tenetur deserunt amet suscipit iusto
+                  soluta eum doloremque animi iste omnis dolorum, ea ducimus.
+                </p>
+              </div>
 
+              <a href="#">Learn more</a>
+            </div>
+          </div>
+          <div class="item" data-merge="1">
+            <div class="image">
+              <img src="img/02_CardImage.webp" alt="test" />
+            </div>
+            <div class="item-body">
+              <div class="text">
+                <strong>05.03.2024</strong>
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Necessitatibus delectus nam, in libero, accusantium voluptatum
+                  ex veniam nesciunt, iusto totam quidem et fugiat asperiores.
+                  Nam harum provident id incidunt eius odio voluptate blanditiis
+                  unde molestias modi itaque, ipsa quibusdam accusantium
+                  voluptatum ad laboriosam vitae sequi amet aspernatur dolorem!
+                  Et corporis laudantium tenetur deserunt amet suscipit iusto
+                  soluta eum doloremque animi iste omnis dolorum, ea ducimus.
+                </p>
+              </div>
+
+              <a href="#">Learn more</a>
+            </div>
+          </div>
+          <div class="item" data-merge="1">
+            <div class="image">
+              <img src="img/02_CardImage.webp" alt="test" />
+            </div>
+            <div class="item-body">
+              <div class="text">
+                <strong>05.03.2024</strong>
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Necessitatibus delectus nam, in libero, accusantium voluptatum
+                  ex veniam nesciunt, iusto totam quidem et fugiat asperiores.
+                  Nam harum provident id incidunt eius odio voluptate blanditiis
+                  unde molestias modi itaque, ipsa quibusdam accusantium
+                  voluptatum ad laboriosam vitae sequi amet aspernatur dolorem!
+                  Et corporis laudantium tenetur deserunt amet suscipit iusto
+                  soluta eum doloremque animi iste omnis dolorum, ea ducimus.
+                </p>
+              </div>
+
+              <a href="#">Learn more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="btm">
+          <div class="left">
+            <div class="sec-title gold">
+              <h1>Let us help you<br />Make the right decision</h1>
+            </div>
+          </div>
+          <div class="right">
+            <form action="">
+              <div class="input">
+                <label for="Name" class="form-label">Name*</label>
+                <input type="text" class="form-control" id="Name" />
+                
+              </div>
+              <div class="input">
+                <label for="Phone" class="form-label">Phone Number*</label>
+                <input type="phone" class="form-control" id="Phone" />
+              </div>
+              <div class="input">
+                <label for="Email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="Email" />
+              </div>
+
+              <div class="btns">
+                <button class="gold-btn">Send</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End News -->
+    <!-- Start Footer -->
+    <footer>
+      <div class="container">
+        <div class="boxs">
+          <div class="box">
+            <div class="logo"><img src="img/Logo.svg" alt="logo" /></div>
+            <div class="links">
+              <img src="img/00_Icons/16_Footer_Icons/ig.svg" alt="link" />
+              <img src="img/00_Icons/16_Footer_Icons/fb.svg" alt="link" />
+              <img src="img/00_Icons/16_Footer_Icons/yt.svg" alt="link" />
+              <img src="img/00_Icons/16_Footer_Icons/linkedin.svg" alt="link" />
+              <img src="img/00_Icons/16_Footer_Icons/twitter.svg" alt="link" />
+            </div>
+          </div>
+          <div class="box">
+            <div class="title">
+              <strong>Quick Links</strong>
+            </div>
+            <div class="sections">
+              <a href="#">About us</a>
+              <a href="#">Terms and Conditions</a>
+              <a href="#">Privacy Policy</a>
+              <a href="#">Contact us</a>
+            </div>
+          </div>
+          <div class="box">
+            <div class="title">
+              <strong>Contact</strong>
+            </div>
+            <div class="text">
+              <p>info@elitehomes.ae</p>
+              <p>+971 56 875 6310</p>
+            </div>
+          </div>
+          <div class="box">
+            <div class="title">
+              <strong>Address</strong>
+            </div>
+            <div class="text">
+              <p>Office No. 1214, Burlington Tower,</p>
+              <p>Business Bay, Dubai</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <!-- ContactModal -->
+    <div
+      class="modal fade modal-form"
+      id="contactModal"
+      tabindex="-1"
+      aria-labelledby="contactModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="btn"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+            <img src="img/00_Icons/03_close.svg" alt="close">
+          </button>
+
+          </div>
+          <div class="modal-body">
+            <p>Please leave your contact information,<br>our experts will contact you shortly</p>
+            <form action="" id="form_1">
+              <div class="input">
+                <label for="Name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="Name" >
                
-
-               <?php //Projects 
-               ?>
-               <div class=" col-md-4 col-sm-6 tile_div">
-
-                  <div class="notifications_div">
-                     <a href="<?= $app_folder ?>/admin/projects<?= $authUser['user_role'] == 'admin.content' ? '' : '?from='.$authUser['stat_lastlogin'] ?>" ng-if="rec.dashboard.notifications.new_projects>0" class="badge badge-success noteItm">
-                        <i class="fa fa-bell"></i> {{rec.dashboard.notifications.new_projects}} <?= __('new') ?>
-                     </a>
-                     <a href="<?= $app_folder ?>/admin/projects?stat_updated=0" ng-if="rec.dashboard.notifications.new_outdated_projects>0" class="badge badge-danger noteItm">
-                        <i class="fa fa-retweet"></i> {{rec.dashboard.notifications.new_outdated_projects}} <?= __('outdated') ?>
-                     </a>
-                  </div>
-                  
-                  <a href="<?= $app_folder ?>/admin/projects" class="tile_div_content">
-                     <span class="count_top"><i class="fa fa-building"></i> <?= __('projects') ?></span>
-                     <div class="count">
-                        <ii>{{rec.dashboard.stats.numbers.total_active_projects}}</ii>/
-                        <small class="grayText">{{rec.dashboard.stats.numbers.total_inactive_projects}}</small>
-                     </div>
-                     <span class="count_bottom"><?= __('active') ?>/
-                        <span class="grayText"><?= __('inactive') ?></span>
-                     </span>
-                  </a>
-               </div>
-
-               <?php //Developers 
-               if (in_array($authUser['user_role'], ['admin.admin', 'admin.root', 'admin.portfolio', 'admin.supervisor'])) {
-               ?>
-                  <div class=" col-md-4 col-sm-6 col-6 tile_div">
-                     <a href="<?= $app_folder ?>/admin/developers" class="tile_div_content">
-                        <span class="count_top"><i class="fa fa-cubes"></i> <?= __('developers') ?></span>
-                        <div class="count">
-                           <ii>{{rec.dashboard.stats.numbers.total_developers}}</ii>
-                        </div>
-                        <span class="count_bottom"><?= __('total') ?>
-                        </span>
-                     </a>
-                  </div>
-               <?php } ?>
-
-               <?php //Users 
-               if (in_array($authUser['user_role'], ['admin.admin', 'admin.root'])) {
-               ?>
-                  <div class=" col-md-4 col-sm-6 col-6 tile_div">
-                     <a href="<?= $app_folder ?>/admin/users" class="tile_div_content">
-                        <span class="count_top"><i class="fa fa-user"></i> <?= __('users') ?></span>
-                        <div class="count">
-                           <ii>{{rec.dashboard.stats.numbers.total_enabled_users}}</ii>/
-                           <small class="grayText">{{rec.dashboard.stats.numbers.total_disabled_users}}</small>
-                        </div>
-                        <span class="count_bottom"><?= __('active') ?>/
-                           <span class="grayText"><?= __('inactive') ?></span>
-                        </span>
-                     </a>
-                  </div>
-               <?php } ?>
-
-            </div>
-         </div>
+              </div>
+              <div class="input phone">
+                <div class="inline_input" data-bs-target="#countryModal2" data-bs-toggle="modal" data-bs-dismiss="modal">
+                  <img src="img/png100px/tr.png" title="placeholder" alt="TR" id="countryImg">
+                  <i class="fa-solid fa-angle-down"></i>
+                  <input type="tel" name="zip" id="zip" value="+90" maxlength="4">
+                 </div>
+                <label for="PhoneNumber" class="form-label">Phone Number*</label>
+                <input type="phone" class="form-control" id="PhoneNumber" >
+              </div>
+              <div class="input">
+                <label for="Email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="Email" >
+              </div>
+              <div class="btns">
+                <button class="gold-btn dark-gold-btn" data-bs-target="#lastModal" data-bs-toggle="modal" data-bs-dismiss="modal">
+                  Send
+                </button>
+              </div>
+            </form>
+          </div>
+       
+        </div>
       </div>
-
-      <div class="row">
-         <?php // Prices blocks chart 
-            if(in_array($authUser['user_role'], ['admin.admin', 'admin.root'])){
-         ?>
-         <div class="col-md-12 col-sm-12" id="priceBlocksChart">
-            <div class="dashboard_graph">
-               <div class="x_title row">
-                  <div class="col-9">
-                     <h3><?= __('properties_count') ?> - <small class="grayText"><?= __('per_price_range') ?></small></h3>
-                  </div>
-                  <div class="col-3 expand-icon">
-                     <a href ng-click="toImage('#priceBlocksChart')">
-                        <i class="fa fa-image"></i>
-                     </a> &nbsp; &nbsp;
-                     <a href ng-click="isExpanded.priceBlocksChart = !isExpanded.priceBlocksChart">
-                        <i class="fa fa-{{isExpanded.priceBlocksChart ? 'compress' : 'expand'}}"></i>
-                     </a>
-                  </div>
-               </div>
-               <div class="{{!isExpanded.priceBlocksChart ? 'col-md-9 col-sm-9' : 'col-md-12 col-sm-12'}} ">
-                  <div ng-if="rec.dashboard.stats.prices.values.length>0">
-                     <canvas id="price_blocks_chart" set-chart='doughnut' dt='prices' unit='<?= __('properties') ?>'></canvas>
-                  </div>
-               </div>
-               <div class="{{!isExpanded.priceBlocksChart ? 'col-md-3 col-sm-3' : 'col-md-12 col-sm-12'}}   bg-white h300" ng-ng-style="{{ !isExpanded.priceBlocksChart ? 'max-height: 400px; overflow: auto;' : '' }}">
-                  <div class="x_title">
-                     <h2><?= __('properties') ?></h2>
-                     <div class="clearfix"></div>
-                  </div>
-                  <div ng-repeat="price in rec.dashboard.stats.prices.labels track by $index">
-                     <p class="progress_item_title"><span>{{price}}</span>/ <span>{{ rec.dashboard.stats.prices.values[$index] }} <?= __('properties') ?></span></p>
-                     <div class="progress progress_sm" style="width: 100%;">
-                        <div class="progress-bar" set-progress-width="{{rec.dashboard.stats.prices.values.join(',')}}" ind="{{$index}}">
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="clearfix"></div>
+    </div>
+       <!-- End ContactModal -->
+       <!-- CountryList Modal -->
+       <div class="modal fade" id="countryModal2" aria-hidden="true" aria-labelledby="countryModalLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            
+            <div class="modal-body" data-bs-target="#contactModal" data-bs-toggle="modal" data-bs-dismiss="modal">
+              <div class="countriesList" id="countriesList">
+                <ul></ul>
             </div>
-         </div>
-         <?php } ?>
-
-
-         <?php // Users roles count 
-            if(in_array($authUser['user_role'], ['admin.admin', 'admin.root'])){
-         ?>
-         <div class="col-md-6 col-sm-12" id="userChart">
-            <div class="dashboard_graph">
-               <div class="x_title row">
-                  <div class="col-9">
-                     <h3><?= __('users') ?> - <small class="grayText"><?= __('user_role') ?></small></h3>
-                  </div>
-                  <div class="col-3 expand-icon">
-                     <a href ng-click="toImage('#userChart')">
-                        <i class="fa fa-image"></i>
-                     </a> &nbsp; &nbsp;
-                     <a href ng-click="isExpanded.userChart = !isExpanded.userChart">
-                        <i class="fa fa-{{isExpanded.userChart ? 'compress' : 'expand'}}"></i>
-                     </a>
-                  </div>
-               </div>
-               <div class="{{!isExpanded.userChart ? 'col-md-9 col-sm-9' : 'col-md-12 col-sm-12'}} ">
-                  <div ng-if="rec.dashboard.stats.users.items.length>0">
-                     <canvas id="users_chart" set-chart='pie' dt='users'></canvas>
-                  </div>
-               </div>
-               <div class="{{!isExpanded.userChart ? 'col-md-3 col-sm-3' : 'col-md-12 col-sm-12'}}   bg-white h300" ng-ng-style="{{ !isExpanded.userChart ? 'max-height: 400px; overflow: auto;' : '' }}">
-                  <div class="x_title">
-                     <h2><?= __('user_role') ?></h2>
-                     <div class="clearfix"></div>
-                  </div>
-                  <div ng-repeat="user in rec.dashboard.stats.users.labels track by $index">
-                     <p class="progress_item_title"><span>{{user}}</span>/ <span>{{ rec.dashboard.stats.users.values[$index] }} <?= __('user') ?></span></p>
-                     <div class="progress progress_sm" style="width: 100%;">
-                        <div class="progress-bar" set-progress-width="{{rec.dashboard.stats.users.values.join(',')}}" ind="{{$index}}">
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="clearfix"></div>
             </div>
-         </div>
-         <?php } ?>
-
-
-         <?php // Users activities 
-            if(in_array($authUser['user_role'], ['admin.admin', 'admin.root'])){
-         ?>
-         <div class="col-md-6 col-sm-12" id="userLoginsChart">
-            <div class="dashboard_graph">
-               <div class="x_title row">
-                  <div class="col-9">
-                     <h3><?= __('users') ?> - <small class="grayText"><?= __('users_activities') ?></small></h3>
-                  </div>
-                  <div class="col-3 expand-icon">
-                     <a href ng-click="toImage('#userLoginsChart')">
-                        <i class="fa fa-image"></i>
-                     </a> &nbsp; &nbsp;
-                     <a href ng-click="isExpanded.userLoginsChart = !isExpanded.userLoginsChart">
-                        <i class="fa fa-{{isExpanded.userLoginsChart ? 'compress' : 'expand'}}"></i>
-                     </a>
-                  </div>
-               </div>
-               <div class="{{!isExpanded.userLoginsChart ? 'col-md-9 col-sm-9' : 'col-md-12 col-sm-12'}} ">
-                  <div ng-if="rec.dashboard.stats.logins.items.length>0">
-                     <canvas id="users_logins_chart" set-chart='doughnut' dt='logins' unit='<?= __('logins') ?>'></canvas>
-                  </div>
-               </div>
-               <div class="{{!isExpanded.userLoginsChart ? 'col-md-3 col-sm-3' : 'col-md-12 col-sm-12'}}   bg-white h300" ng-ng-style="{{ !isExpanded.userLoginsChart ? 'max-height: 400px; overflow: auto;' : '' }}">
-                  <div class="x_title">
-                     <h2><?= __('users_activities') ?></h2>
-                     <div class="clearfix"></div>
-                  </div>
-                  <div ng-repeat="user in rec.dashboard.stats.logins.labels track by $index">
-                     <p class="progress_item_title"><span>{{user}}</span>/ <span>{{ rec.dashboard.stats.logins.values[$index] }} <?= __('logins') ?></span></p>
-                     <div class="progress progress_sm" style="width: 100%;">
-                        <div class="progress-bar" set-progress-width="{{rec.dashboard.stats.logins.values.join(',')}}" ind="{{$index}}">
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="clearfix"></div>
-            </div>
-         </div>
-         <?php } ?>
+           
+          </div>
+        </div>
       </div>
-
-
-   </div>
-</div>
-
-
-<?php /* USERS ?>
-   <div class="row" id="userChart">
-      <div class="col-md-12 col-sm-12 ">
-         <div class="dashboard_graph">
-            <div class="x_title row">
-               <div class="col-9">
-                  <h3><?=__('users_daily_results')?> - <small class="grayText"><?=__('choco_piece')?></small></h3>
-               </div>
-               <div class="col-3 expand-icon">
-                  <a href ng-click="toImage('#userChart')">
-                     <i class="fa fa-image"></i>
-                  </a> &nbsp; &nbsp;
-                  <a href ng-click="isExpanded.userChart = !isExpanded.userChart">
-                     <i class="fa fa-{{isExpanded.userChart ? 'compress' : 'expand'}}"></i>
-                  </a>
-               </div>
+       <!-- End CountryList Modal -->
+       <!-- Last Modal -->
+       <div class="modal fade modal-form" id="lastModal" tabindex="-1" aria-labelledby="lastModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+            
+              <button
+              type="button"
+              class="btn"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+            <img src="img/00_Icons/03_close.svg" alt="close">
+          </button>
             </div>
-            <div class="{{!isExpanded.userChart ? 'col-md-9 col-sm-9' : 'col-md-12 col-sm-12'}} ">
-               <div ng-if="rec.dashboard.stats.users.items.length>0"> 
-                  <canvas id="users_chart" set-chartxxxx='line' dt='users'></canvas> 
-               </div>
+            <div class="modal-body">
+              <div class="text">
+                <h1>Thank you</h1>
+                <p>our experts will contact you shortly</p>
+              </div>
             </div>
-            <div class="{{!isExpanded.userChart ? 'col-md-3 col-sm-3' : 'col-md-12 col-sm-12'}}   bg-white" 
-               ng-ng-style="{{ !isExpanded.userChart ? 'max-height: 400px; overflow: auto;' : '' }}">
-               <div class="x_title">
-                  <h2><?=__('users_total_results')?></h2>
-                  <div class="clearfix"></div>
-               </div>
-               <div ng-repeat="user in rec.dashboard.stats.users.items">
-                  <p class="progress_item_title"><span>{{user.label}}</span>/ <span>{{addSeperator( user.total_values )}} <?=__('piece')?></span></p>
-                  <div class="progress progress_sm" style="width: 90%;">
-                    <div class="progress-bar" ng-style="
-                      width: {{ getPercentage( rec.dashboard.stats.users.items, user.total_values ) }}%;
-                      background: {{clrs[$index]}}
-                      "></div>
-                  </div>
-               </div>
-            </div>
-            <div class="clearfix"></div>
-         </div>
+          
+          </div>
+        </div>
       </div>
-   </div>
+       <!-- End Last Modal -->
+    <script src="js/all.js"></script>
+    <script>
+      $(document).ready(function () {
+        getCountries();
+        $("#close-icon").click(function(){
+        $("#Right").css("display", "none");
+        // console.log($("#Right"));
+  });
+      });
+      function getCountries(tar) {
+        $.getJSON("js/countries.json", function (res) {
+          var html = "";
+          for (var i in res) {
+            html +=
+              "<li onclick=\"setVal('" +
+              res[i].val +
+              "|" +
+              res[i].code +
+              '\')"><img src="img/png100px/' +
+              ("bq,cw,gg,im,je,xk,bl,mf,sx,ss".indexOf(res[i].code) > -1
+                ? "noimg"
+                : res[i].code) +
+              '.png" title="' +
+              res[i].cname +
+              '" alt="' +
+              res[i].cname +
+              '" /> ' +
+              res[i].cname +
+              "</li>";
+          }
+          $(tar || "#countriesList ul").html(html);
+        }).fail(function () {
+          console.log("ERROR: countriesList not loaded!.");
+        });
+      }
+      var form_target = "#form_1";
 
-   
-   <?php // MACHINES ?>
-   <div class="row" id="machineChart">
-      <div class="col-md-12 col-sm-12 ">
-         <div class="dashboard_graph">
+      function setVal(val, tar) {
+        if (!tar) {
+          tar = form_target;
+        }
+        !val ? (val = COUNTRY.calling_code + "|" + COUNTRY.country_code2) : val;
+        val = val.split("|");
 
-            <div class="x_title row">
-               <div class="col-9">
-                  <h3><?=__('machines_chart_title')?></h3>
-               </div>
-               <div class="col-3 expand-icon">
-                  <a href ng-click="toImage('#machineChart')">
-                     <i class="fa fa-image"></i>
-                  </a> &nbsp; &nbsp;
-                  <a href ng-click="isExpanded.machineChart = !isExpanded.machineChart">
-                     <i class="fa fa-{{isExpanded.machineChart ? 'compress' : 'expand'}}"></i>
-                  </a>
-               </div>
-            </div>
-            <div class="{{!isExpanded.machineChart ? 'col-md-6 col-sm-6' : 'col-md-12 col-sm-12'}} ">               
-               <div ng-if="rec.dashboard.stats.machines.items.length>0"> 
-                  <canvas id="machines_chart" set-chart='pie' dt='machines'></canvas> 
-               </div>
-            </div>
-            <div class="{{!isExpanded.machineChart ? 'col-md-6 col-sm-6' : 'col-md-12 col-sm-12'}}  bg-white" 
-               ng-style="{{ !isExpanded.machineChart ? 'max-height: 250px; overflow: auto;' : '' }}">
-               <div class="x_title">
-                  <h2><?=__('machines_total_results')?></h2>
-                  <div class="clearfix"></div>
-               </div>
-               <div ng-repeat="machine in rec.dashboard.stats.machines.items">
-                  <p class="progress_item_title"><span>{{machine.category_name}}</span>/ <span>{{addSeperator( machine.total_values )}} <?=__('piece')?></span></p>
-                  <div class="progress progress_sm" style="width: 90%;">
-                    <div class="progress-bar" ng-style="
-                      width: {{ getPercentage( rec.dashboard.stats.machines.items, machine.total_values ) }}%;
-                      background: {{clrs[$index]}}
-                      "></div>
-                  </div>
-               </div>
-            </div>
-            <div class="clearfix"></div>
-         </div>
-      </div>
-   </div>
-
-   <?php // CHOCOTYPES ?>
-   <div class="row" id="chocotypeChart">
-      <div class="col-md-12 col-sm-12 ">
-         <div class="dashboard_graph">
-            <div class="x_title row">
-               <div class="col-9">
-                  <h3><?=__('chocotypes_chart_title')?></h3>
-               </div>
-               <div class="col-3 expand-icon">
-                  <a href ng-click="toImage('#chocotypeChart')">
-                     <i class="fa fa-image"></i>
-                  </a> &nbsp; &nbsp;
-                  <a href ng-click="isExpanded.chocotypeChart = !isExpanded.chocotypeChart">
-                     <i class="fa fa-{{isExpanded.chocotypeChart ? 'compress' : 'expand'}}"></i>
-                  </a>
-               </div>
-            </div>
-            <div class="{{!isExpanded.chocotypeChart ? 'col-md-6 col-sm-6' : 'col-md-12 col-sm-12'}} ">
-               <!-- <canvas id="chocotypes_chart"></canvas> -->
-               
-               <div ng-if="rec.dashboard.stats.chocotypes.items.length>0">
-                  <canvas id="chocotypes_chart" set-chartxxxx='pie' dt='chocotypes' unit="<?=__('kg')?>"></canvas> 
-               </div>
-            </div>
-            <div class="{{!isExpanded.chocotypeChart ? 'col-md-6 col-sm-6' : 'col-md-12 col-sm-12'}}  bg-white" ng-style="{{ !isExpanded.chocotypeChart ? 'max-height: 250px; overflow: auto;' : '' }}">
-               <div class="x_title">
-                  <h2><?=__('chocotypes_total_results')?></h2>
-                  <div class="clearfix"></div>
-               </div>
-               <div ng-repeat="chocotype in rec.dashboard.stats.chocotypes.items">
-                  <p class="progress_item_title">
-                     <span>{{chocotype.category_name}}</span> / 
-                     <span>{{addSeperator( chocotype.result_per_chocotype_kg )}} <?=__('kg')?></span>
-                  </p>
-                  <div class="progress progress_sm" style="width: 90%;">
-                    <div class="progress-bar" ng-style="
-                      width: {{ getPercentage( rec.dashboard.stats.chocotypes.items, chocotype.total_values ) }}%;
-                      background: {{clrs[$index]}}
-                      "></div>
-                  </div>
-               </div>
-            </div>
-            <div class="clearfix"></div>
-         </div>
-      </div>
-   </div>
+        if (tar == "all") {
+          $("#form_mdl #zip").val(val[0]);
+          $("#form_mdl #countryImg").attr(
+            "src",
+            "img/png100px/" + val[1] + ".png"
+          );
+          $("#form_1 #zip").val(val[0]);
+          $("#form_1 #countryImg").attr(
+            "src",
+            "img/png100px/" + val[1] + ".png"
+          );
+          $("#form_2 #zip").val(val[0]);
+          $("#form_2 #countryImg").attr(
+            "src",
+            "img/png100px/" + val[1] + ".png"
+          );
+        } else {
+          $(tar + " #zip").val(val[0]);
+          $(tar + " #countryImg").attr(
+            "src",
+            "img/png100px/" + val[1] + ".png"
+          );
+          $(tar + " #phone").focus();
+        }
+      }
 
 
-   <?php // RESULTS ?>
-   <div class="row" id="resultChart">
-      <div class="col-md-12 col-sm-12 ">
-         <div class="dashboard_graph">
-            <div class="x_panel2 ">
-
-               <div class="x_title row">
-                  <div class="col-9">
-                     <h3><?=__('results_chart_title')?></h3>
-                  </div>
-                  <div class="col-3 expand-icon">
-                     <a href ng-click="toImage('#resultChart')">
-                        <i class="fa fa-image"></i>
-                     </a>
-                  </div>
-               </div>
-
-               <div class="x_content">       
-                  <div ng-if="rec.dashboard.stats.results.items.length>0"> 
-                     <canvas id="results_chart" set-chartxxxx='bar' dt='results'></canvas> 
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-
-   <?php */ ?>
-</div>
+    </script>
+  </body>
+</html>

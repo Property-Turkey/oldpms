@@ -335,7 +335,10 @@ $params = http_build_query(($this->request->getQuery()));
                                 <div class="col-md-2 col-8 notwrapped">
                                     {{DtSetter('currencies_icons', itm.property_currency)}}{{ nFormat(itm.property_price, false, true)}}
                                     <i class="grayText">
-                                        ({{DtSetter('currencies_icons', '<?= $currCurrency ?>')}}{{currencyConverter( DtSetter('currencies', itm.property_currency), '<?= $this->Do->get('currencies')[$currCurrency] ?>', itm.property_price )}})</i>
+                                        {{itm}}
+                                    <!-- {{ nFormat(itm.property_usdprice, false, true)}} -->
+                                        <!-- ({{DtSetter('currencies_icons', '<?= $currCurrency ?>')}}{{currencyConverter( DtSetter('currencies', itm.property_currency), '<?= $this->Do->get('currencies')[$currCurrency] ?>', itm.property_price )}}) -->
+                                    </i>
                                     <div ng-if="compareDate( itm.stat_expired )" class="update_div">
                                         <i class="fa fa-clock-o redText movScale"></i>
                                         <a href="javascript:void(0);"  

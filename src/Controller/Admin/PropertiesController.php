@@ -523,7 +523,9 @@ debug( $regions );
 
             $curCurrency = $this->Do->get('currencies')[$dt['property_currency']];
             $dt['property_usdprice'] = $this->Do->currencyConverter($curCurrency, "USD", $dt['property_price']);
+            // dd($dt['property_usdprice']);
             $rec = $this->Properties->patchEntity($rec, $dt);
+            $rec->property_usdprice = $dt['property_usdprice'];
 
         }
 

@@ -50,11 +50,11 @@
     <!-- bootstrap-daterangepicker -->
     <?php //echo $this->Html->css('/gentela/vendors/bootstrap-daterangepicker/daterangepicker.css') ?>
     <!-- NG Tags Input-->
-    <?php echo $this->Html->css('ng-tags-input.min') ?>
+    <?php //echo $this->Html->css('ng-tags-input.min') ?>
     <!-- Bootstrap Multiple Select -->
-    <?php echo $this->Html->css('bootstrap-select.min') ?>
+    <?php //echo $this->Html->css('bootstrap-select.min') ?>
     <!-- Range NoUi slider -->
-    <?php echo $this->Html->css('nouislider.min') ?>
+    <?php //echo $this->Html->css('nouislider.min') ?>
     <!-- Custom Theme Style -->
     <?php //echo $this->Html->css('/gentela/build/css/custom.min.css') ?> 
     <!-- MY Custom Theme Style -->
